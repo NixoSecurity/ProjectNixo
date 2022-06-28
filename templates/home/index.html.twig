@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col">
+    <table>
+    <thead>
+        
+    </thead>
+
+    <tbody>
+        <tr>
+        {% for project in projects %}
+     <td>{{ project.title }}</td>
+     
+
+{% endfor %}
+       
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+{% endblock %}

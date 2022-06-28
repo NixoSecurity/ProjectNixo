@@ -20,3 +20,7 @@
 ###< symfony/phpunit-bridge ###
 
 composer.lock
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

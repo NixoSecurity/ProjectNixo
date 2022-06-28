@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <td>Titre</td>
+            <td>Description</td>
+            <td>ville</td>
+            <td>créer le</td>
+            <td>image</td>
+            
+        </tr>
+    </thead>
+    <tbody>{% for project in projects %}
+        <tr>
+        
+            <td>{{ project.title }}</td>
+            <td>{{ project.Description | u.truncate(20,'...') }}</td>
+            <td>{{ project.city }}</td>
+            <td>{{ project.createdAt | date('d-m-Y') }}</td>
+            <td>{% if vich_uploader_asset(project,'coverFile') %}
+						<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('thumbnail') }}" id="object-position-1" alt="image d'un projet">
+					{% endif %}</td>
+            
+        </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}
