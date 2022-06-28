@@ -141,7 +141,7 @@ class Project
         return $this->coverFile;
     }
 
-    public function setCoverFile(?File $coverFile=null): void
+    public function setCoverFile(?File $coverFile=null): self
     {
         $this->coverFile = $coverFile;
 
@@ -150,6 +150,6 @@ class Project
             // otherwise the event listeners won't be called and the file is lost
             $this->updated_at = new \DateTimeImmutable();
         }
-        
+        return $this;
     }
 }

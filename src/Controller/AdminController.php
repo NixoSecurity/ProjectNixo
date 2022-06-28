@@ -18,10 +18,21 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,Request $request): Response
     {
+        $projects = $paginatorInterface->paginate(
+            $projectRepository->findAll(),
+            $request->query->getInt('page',1),5
+        );
+        $cats = $paginatorInterface->paginate(
+            $categoryRepository->findAll(),
+            $request->query->getInt('page',1),5
+        );
+       
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'projects' => $projects,
+            'cats' => $cats,
         ]);
     }
 
@@ -43,7 +54,7 @@ class AdminController extends AbstractController
 
           
            
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_admin');
             
         }
 
@@ -53,39 +64,52 @@ class AdminController extends AbstractController
 
         
     }
-    // #[Route('/admin/category/delete/{id}', name: 'app_admin_deleteCat', requirements: ['id' => '\d+'], methods: ['POST'])]
-    // public function deleteCate(Category $category, Request $request, CategoryRepository $categoryRepository): RedirectResponse
-    // {
 
-    //     $tokenCsrf = $request->request->get('token');
-
-    //     if ($this->isCsrfTokenValid('delete-project-' . $category->getId(), $tokenCsrf)) {
-    //         $categoryRepository->remove($category, true);
-    //         $this->addFlash('success', 'Le projet à bien été supprimée');
-    //         $success = true;
-    //     }
-
-    //     return $this->redirectToRoute('app_admin_project', [
-    //         'success' => $success
-    //     ]);
-    // }
-    /**
-     * CRUD Project
-     */
-    #[Route('/admin/projects', name: 'app_admin_projects')]
-    public function projectsAll(ProjectRepository $projectRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+    #[Route('/admin/cat/edit/{id}', name: 'app_admin_editCat', requirements: ['id' => '\d+'])]
+    public function updateCat(Category $category, Request $request, CategoryRepository $categoryRepository): Response
     {
-        $projects = $paginatorInterface->paginate(
-            $projectRepository->findAll(),
-            $request->query->getInt('page',1),5
-        );
-       
 
-        return $this->render('admin/projects.html.twig', [
-            'projects' => $projects,
+        $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
+       
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+          
+            $categoryRepository->add($category, true);
+
+            $this->addFlash('success', 'Le category :' . $category->getname() . 'mis a jour !');
+            
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('category/newcategory.html.twig', [
+            'form' => $form->createView(),
+
+        ]);
+    }
+    #[Route('/admin/category/delete/{id}', name: 'app_admin_deleteCat', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function deleteCat(Category $category, Request $request, CategoryRepository $categoryRepository): RedirectResponse
+    {
+
+        $tokenCsrf = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('delete-project-' . $category->getId(), $tokenCsrf)) {
+            $categoryRepository->remove($category, true);
+            $this->addFlash('success', 'La catégorie à bien été supprimée');
+            $success = true;
+        }
+
+        return $this->redirectToRoute('app_admin', [
+            'success' => $success
         ]);
     }
 
+
+
+
+    /**
+     * CRUD Project
+     */
     #[Route('/admin/project/new', name: 'app_admin_newProject')]
     public function addProject(Request $request,ProjectRepository $projectRepository): Response
     {
@@ -101,7 +125,7 @@ class AdminController extends AbstractController
 
           
            
-            return $this->redirectToRoute('app_admin_projects');
+            return $this->redirectToRoute('app_admin');
             
         }
 
@@ -110,7 +134,7 @@ class AdminController extends AbstractController
         ]);
     }
     #[Route('/admin/project/edit/{id}', name: 'app_admin_editProject', requirements: ['id' => '\d+'])]
-    public function update(Project $project, Request $request, ProjectRepository $projectRepository): Response
+    public function updateProject(Project $project, Request $request, ProjectRepository $projectRepository): Response
     {
 
         $form = $this->createForm(ProjectFormType::class, $project);
@@ -123,7 +147,7 @@ class AdminController extends AbstractController
 
             $this->addFlash('success', 'Le project :' . $project->gettitle() . 'mis a jour !');
             
-            return $this->redirectToRoute('app_admin_projects');
+            return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('project/newProject.html.twig', [
@@ -145,7 +169,7 @@ class AdminController extends AbstractController
             $success = true;
         }
 
-        return $this->redirectToRoute('app_admin_projects', [
+        return $this->redirectToRoute('app_admin', [
             'success' => $success
         ]);
     }
