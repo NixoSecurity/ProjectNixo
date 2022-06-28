@@ -53,4 +53,70 @@
 
     </div>
 
+
+{# Carousel VS4 #}
+    <section class="portfolio-2 text-center">
+            
+              <input class="radio1 mt-5" type="radio" name="position" checked /> 
+              <input class="radio2 mt-5" type="radio" name="position" /> 
+              <input class="radio3 mt-5" type="radio" name="position" />
+              <input class="radio4 mt-5" type="radio" name="position" />
+              <input class="radio5 mt-5 " type="radio" name="position" />  
+          
+
+<div>
+        <label class="container-radio">
+            <input class="radio1 mt-5" type="radio" name="position" checked />  
+            <span class=" checkmark checkmark1"></span> 
+        </label> 
+
+  
+        <label class="container-radio">
+            <input class="radio2 mt-5" type="radio" name="position" />
+            <span class=" checkmark checkmark2"></span> 
+        </label> 
+
+
+        <label class="container-radio">
+           <input class="radio3 mt-5" type="radio" name="position" />
+            <span class=" checkmark checkmark3"></span> 
+        </label> 
+
+  
+        <label class="container-radio">
+            <input class="radio4 mt-5" type="radio" name="position" />
+            <span class="checkmark checkmark4"></span> 
+        </label> 
+
+    
+        <label class="container-radio">
+            <input class="radio5 mt-5 " type="radio" name="position" />  
+            <span class=" checkmark checkmark5"></span> 
+        </label> 
+
+</div>
+
+        
+        
+       
+         
+
+        
+        <main id="carousel">
+
+            {% for project in projects %}
+                <div class="item">    
+                    <h5> {{ project.title }}</h5>
+                    <img class="portfolio-4-img" src="{{ asset('img/'~ project.cover) }}">
+                    <p>{{project.description}}</p>
+                </div>
+            {% endfor %}
+                {# <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div> #}
+        </main>
+
+    </section>
+
 {% endblock %}
