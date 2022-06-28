@@ -23,13 +23,14 @@ class Project
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
     private $category;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
@@ -140,7 +141,7 @@ class Project
         return $this->coverFile;
     }
 
-    public function setCoverFile(?File $coverFile=null): self
+    public function setCoverFile(?File $coverFile=null): void
     {
         $this->coverFile = $coverFile;
 
@@ -149,6 +150,6 @@ class Project
             // otherwise the event listeners won't be called and the file is lost
             $this->updated_at = new \DateTimeImmutable();
         }
-        return $this;
+        
     }
 }

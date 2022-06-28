@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProjectFormType;
 use App\Form\CategoryFormType;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends AbstractController
 {
@@ -49,7 +50,25 @@ class AdminController extends AbstractController
         return $this->render('category/newCategory.html.twig', [
             'form' => $form->createView()
         ]);
+
+        
     }
+    // #[Route('/admin/category/delete/{id}', name: 'app_admin_deleteCat', requirements: ['id' => '\d+'], methods: ['POST'])]
+    // public function deleteCate(Category $category, Request $request, CategoryRepository $categoryRepository): RedirectResponse
+    // {
+
+    //     $tokenCsrf = $request->request->get('token');
+
+    //     if ($this->isCsrfTokenValid('delete-project-' . $category->getId(), $tokenCsrf)) {
+    //         $categoryRepository->remove($category, true);
+    //         $this->addFlash('success', 'Le projet à bien été supprimée');
+    //         $success = true;
+    //     }
+
+    //     return $this->redirectToRoute('app_admin_project', [
+    //         'success' => $success
+    //     ]);
+    // }
     /**
      * CRUD Project
      */
@@ -82,7 +101,7 @@ class AdminController extends AbstractController
 
           
            
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_admin_projects');
             
         }
 
@@ -90,7 +109,7 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-    #[Route('/admin/project/edit/{id}', name: 'app_editProject', requirements: ['id' => '\d+'])]
+    #[Route('/admin/project/edit/{id}', name: 'app_admin_editProject', requirements: ['id' => '\d+'])]
     public function update(Project $project, Request $request, ProjectRepository $projectRepository): Response
     {
 
@@ -102,14 +121,32 @@ class AdminController extends AbstractController
           
             $projectRepository->add($project, true);
 
-            $this->addFlash('success', 'Le project :' . $project->getname() . 'mis a jour !');
+            $this->addFlash('success', 'Le project :' . $project->gettitle() . 'mis a jour !');
             
-            return $this->redirectToRoute('app_account');
+            return $this->redirectToRoute('app_admin_projects');
         }
 
         return $this->render('project/newProject.html.twig', [
             'form' => $form->createView(),
 
+        ]);
+    }
+
+    #[Route('/admin/project/delete/{id}', name: 'app_admin_deleteProject', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function deleteProject(Project $project, Request $request, ProjectRepository $projectRepository): Response
+    {
+
+        $tokenCsrf = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('delete-project-'. $project->getId(), $tokenCsrf)) {
+        
+           $projectRepository->remove($project,true);
+            $this->addFlash('success', 'Le projet à bien été supprimée');
+            $success = true;
+        }
+
+        return $this->redirectToRoute('app_admin_projects', [
+            'success' => $success
         ]);
     }
 }
