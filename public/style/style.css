@@ -1,0 +1,122 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+:root { 
+    --title-font: 'Libre Baskerville', serif;
+    --text-font: 'Source Sans Pro', sans-serif; 
+  
+    /* vs1 */
+    --bg-primary: #081D38;
+    --bg-secondary:#407DC0;
+    --details:#4D4D4D ;
+    --bg-white: #FDFFF7; 
+    --text-color:#081D38;
+    --text-color-reverse: #FDFFF7;
+    --btn-color: #F55D3E;
+
+    /* vs2 */
+    /* --bg-primary: #081D38;
+    --bg-secondary:#A5A5A5;
+    --details:#BC8396;
+    --bg-white: #FFFFFF; 
+    --text-color:#081D38;
+    --text-color-reverse: #FFFFFF;
+    --btn-color: #FF8200; */
+
+     /* vs3 */
+    /* --bg-primary: #172F4F;
+    --bg-secondary:#2E6171  ;
+    --details:#A5A5A5 ;
+    --bg-white: #FFFFFF; 
+    --text-color:#172F4F;
+    --text-color-reverse: #FFFFFF;
+    --btn-color: #F7D002; */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+.portfolio {
+    background-color: var(--bg-primary);
+}
+
+.carousel-inner {
+    background-color: var(--bg-primary) ;
+    height: 70vh;
+}
+
+.portfolio-img {
+    height: 50vh;
+    object-fit: fill;
+    margin-bottom: 2rem;
+}
+
+.portfolio-title {
+    color: var(--text-color-reverse);
+    font-size: 2rem;
+    font-family: var(--title-font);    
+}
+
+.portfolio-text {
+    color: var(--text-color-reverse);
+    font-size: 1rem;
+    font-family: var(--text-font);  
+    margin-block-start: 2em !important;
+    margin-inline-start: 20em !important;
+    margin-inline-end: 20em !important;
+}
+
+ #portfolioCarousel {
+    height: 78vh;
+    padding: 5vh 0;
+}
+
+.test-button {
+    background-color: var(--btn-color);
+    color: var(--bg-white);
+    font-family: var(--text-font);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 3rem;
+    border-radius: 60px;  
+    transition: 0.5s; 
+    cursor: pointer;    
+}
+
+.test-button:hover {
+    background-color: var(--bg-white);
+    color: var(--btn-color);
+    text-decoration: none;
+    border: 2px solid var(--btn-color);
+    transition: 0.5s;  
+    font-weight: 600;     
+}
+
+.dark {
+    background-color: var(--bg-primary);
+    height: 200px;
+}
+
+.details {
+    background-color: var(--details);
+    height: 200px; 
+}
+
+.secondary {
+    background-color: var(--bg-secondary);
+    height: 200px; 
+}
+
+
+
+
+
+
+
