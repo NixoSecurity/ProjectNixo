@@ -329,7 +329,7 @@ section .portfolio-2{
     background-color: #ccc;
   }
   
-  /* When the radio button is checked, add a blue background */
+  /* When the radio button is checked, add a color background */
   .container-radio input:checked ~ .checkmark {
     background-color: var(--btn-color);
   }
