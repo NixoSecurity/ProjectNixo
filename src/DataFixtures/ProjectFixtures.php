@@ -21,6 +21,7 @@ class ProjectFixtures extends Fixture
             $project->setCover('projectCover.jpg');
             $project->setCity($faker->city);
             $project->setCategory($this->getReference("category_".rand(0, 4)));
+            $project->setClient($this->getReference("client_".rand(0, 1)));
     
             $manager->persist($project);
         }
