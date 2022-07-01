@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -46,6 +48,20 @@ class Project
 
      )]
     private $coverFile;
+
+   
+
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'projects')]
+    private $services;
+
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
+    private $client;
+
+    public function __construct()
+    {
+        $this->client = new ArrayCollection();
+        $this->services = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +166,45 @@ class Project
             // otherwise the event listeners won't be called and the file is lost
             $this->updated_at = new \DateTimeImmutable();
         }
+        return $this;
+    }
+
+   
+
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
         return $this;
     }
 }
