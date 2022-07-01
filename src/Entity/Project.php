@@ -3,9 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
+#[Vich\Uploadable]
 class Project
 {
     #[ORM\Id]
@@ -19,14 +25,43 @@ class Project
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
     private $category;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $created_at;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $updated_at;
+
+    #[Vich\UploadableField(mapping: 'projects', fileNameProperty: 'cover' )]
+    #[Assert\Image(mimeTypesMessage: 'Ceci n\'est pas une image')]
+    #[Assert\File(maxSize: '1M',
+     maxSizeMessage: 'Cette image ne doit pas dépasser les {{ limit }} {{ suffix }}',
+
+     )]
+    private $coverFile;
+
+   
+
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'projects')]
+    private $services;
+
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
+    private $client;
+
+    public function __construct()
+    {
+        $this->client = new ArrayCollection();
+        $this->services = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +124,86 @@ class Project
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getCoverFile(): ?File
+    {
+        return $this->coverFile;
+    }
+
+    public function setCoverFile(?File $coverFile=null): self
+    {
+        $this->coverFile = $coverFile;
+
+        if (null !== $coverFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updated_at = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+   
+
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
