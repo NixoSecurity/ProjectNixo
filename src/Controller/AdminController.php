@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Project;
+use App\Entity\Service;
 use App\Repository\CategoryRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,13 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProjectFormType;
 use App\Form\CategoryFormType;
+use App\Form\ServiceFormType;
+use App\Repository\ServiceRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
     {
         $projects = $paginatorInterface->paginate(
             $projectRepository->findAll(),
@@ -28,11 +31,16 @@ class AdminController extends AbstractController
             $categoryRepository->findAll(),
             $request->query->getInt('page',1),5
         );
+        $services = $paginatorInterface->paginate(
+            $serviceRepository->findAll(),
+            $request->query->getInt('page',1),5
+        );
        
 
         return $this->render('admin/index.html.twig', [
             'projects' => $projects,
-            'cats' => $cats,
+            'cats' => $cats, 
+            'services' => $services
         ]);
     }
 
@@ -173,4 +181,33 @@ class AdminController extends AbstractController
             'success' => $success
         ]);
     }
+
+    /**
+ * CRUD Service
+ */
+#[Route('/admin/service/new', name: 'app_admin_newService')]
+    public function addService(Request $request,ServiceRepository $serviceRepository): Response
+    {
+        $service = new Service;
+        $form = $this->createForm(ServiceFormType::class, $service);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($service);
+            $serviceRepository->add($service, true);
+
+            $this->addFlash('success', 'Votre projet à bien été enregistré !');
+
+          
+           
+            return $this->redirectToRoute('app_admin');
+            
+        }
+
+        return $this->render('service/newservice.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+
 }

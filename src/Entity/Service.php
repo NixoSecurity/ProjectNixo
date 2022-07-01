@@ -21,15 +21,14 @@ class Service
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'services')]
-    private $projects;
+   
 
     #[ORM\ManyToMany(targetEntity: Client::class, inversedBy: 'services')]
     private $clients;
 
     public function __construct()
     {
-        $this->projects = new ArrayCollection();
+        
         $this->clients = new ArrayCollection();
     }
 
@@ -62,32 +61,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection<int, Project>
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
-
-    public function addProject(Project $project): self
-    {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->addService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): self
-    {
-        if ($this->projects->removeElement($project)) {
-            $project->removeService($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Client>

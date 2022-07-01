@@ -49,18 +49,13 @@ class Project
      )]
     private $coverFile;
 
-   
-
-    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'projects')]
-    private $services;
-
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
     private $client;
 
     public function __construct()
     {
         $this->client = new ArrayCollection();
-        $this->services = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -171,30 +166,6 @@ class Project
 
    
 
-
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
-
-    public function addService(Service $service): self
-    {
-        if (!$this->services->contains($service)) {
-            $this->services[] = $service;
-        }
-
-        return $this;
-    }
-
-    public function removeService(Service $service): self
-    {
-        $this->services->removeElement($service);
-
-        return $this;
-    }
 
     public function getClient(): ?Client
     {

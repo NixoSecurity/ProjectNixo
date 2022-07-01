@@ -13,6 +13,7 @@
 <nav>
 <a class="btn btn-primary" href="{{ path('app_admin_newCat')}}">Nouvelle categorie</a>
 <a class="btn btn-primary" href="{{ path('app_admin_newProject')}}">Nouveau projet</a>
+<a class="btn btn-primary" href="{{ path('app_admin_newService')}}">Nouveau service</a>
 
 </nav>
 
@@ -99,5 +100,22 @@
 
 	{{ knp_pagination_render(projects) }}
 
+
+<h2>Table Services</h2>
+<table class="table">
+		<thead>
+			<tr>
+				<td>name</td>
+				
+			</tr>
+		</thead><tbody>
+		{% for service in services %}
+				<tr>
+				<td>{{ service.name }}</td>
+				</tr>
+				{% endfor %}
+		
+		</tbody>
+</table>
 
 {% endblock %}
