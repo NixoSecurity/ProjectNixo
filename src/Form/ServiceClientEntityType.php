@@ -45,7 +45,6 @@ public function buildForm(FormBuilderInterface $builder, array $options)
         $view->vars['placeholder'] = null;
         $view->vars['placeholder_in_choices'] =false;
         $view->vars['multiple'] =true;
-       
         $view->vars['preferred_choices'] =[];
         $view->vars['choices'] = $this->choices($form->getData());
         $view->vars['choice_translation_domain'] =true;
