@@ -44,6 +44,12 @@ class ProjectFormType extends AbstractType
                 'label' => 'Nom de la category',
                 'required' => False
             ])
+            ->add('client', EntityType::class, [
+                'class' => Client²::class,
+                'choice_label' => 'name',
+                'label' => 'Type de client',
+                'required' => False
+            ])
             ->add(
                 'coverFile', VichImageType::class, [
                     'label' => 'Image',

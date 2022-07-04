@@ -26,13 +26,8 @@ class ServiceFormType extends AbstractType
                 'label' => 'Description',
                 'required' => False
             ])
-            ->add('clients',EntityType::class,[
-                'class' => Client::class,
-                'choice_label' =>'name',
-                'label' => 'Type de client associé',
-                'required' => False,
-                'mapped' => false
-
+            ->add('clients',ServiceClientEntityType::class,[
+                'class'=>Client::class
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer '

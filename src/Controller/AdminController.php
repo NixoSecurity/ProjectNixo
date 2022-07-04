@@ -23,7 +23,7 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
     {
-        $projects = $paginatorInterface->paginate(
+        $projects = $paginatorInterface->paginate( 
             $projectRepository->findAll(),
             $request->query->getInt('page',1),5
         );
@@ -126,7 +126,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            dd($project);
             $projectRepository->add($project, true);
 
             $this->addFlash('success', 'Votre projet à bien été enregistré !');

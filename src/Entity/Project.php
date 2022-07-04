@@ -54,7 +54,7 @@ class Project
 
     public function __construct()
     {
-        $this->client = new ArrayCollection();
+        
         
     }
 
