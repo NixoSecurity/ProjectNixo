@@ -1,13 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nixo{% endblock %}
+{% block title %}Nixo
+{% endblock %}
 
 {% block body %}
-    {{ include('component/_navbar.html.twig') }}
-    
+ {{parent()}}
+	
 
-    {{ render(controller(
-        'App\\Controller\\ProjectController::index'
-    )) }}    
-  
+   {# Carousel VS4 #}
+    <section class="portfolio-2 text-center">
+            {# Original radio buttons #}
+              <input class="radio1 mt-5" type="radio" name="position" checked /> 
+              <input class="radio2 mt-5" type="radio" name="position" /> 
+              <input class="radio3 mt-5" type="radio" name="position" />
+              <input class="radio4 mt-5" type="radio" name="position" />
+              <input class="radio5 mt-5 " type="radio" name="position" />  
+          
+
+                {# Personalised radio buttons which do not work currently  #}
+                <div>
+                        <label class="container-radio">
+                            <input class="radio1 mt-5" type="radio" name="position" checked />  
+                            <span class=" checkmark checkmark1"></span> 
+                        </label> 
+
+                
+                        <label class="container-radio">
+                            <input class="radio2 mt-5" type="radio" name="position" />
+                            <span class=" checkmark checkmark2"></span> 
+                        </label> 
+
+
+                        <label class="container-radio">
+                        <input class="radio3 mt-5" type="radio" name="position" />
+                            <span class=" checkmark checkmark3"></span> 
+                        </label> 
+
+                
+                        <label class="container-radio">
+                            <input class="radio4 mt-5" type="radio" name="position" />
+                            <span class="checkmark checkmark4"></span> 
+                        </label> 
+
+                    
+                        <label class="container-radio">
+                            <input class="radio5 mt-5 " type="radio" name="position" />  
+                            <span class=" checkmark checkmark5"></span> 
+                        </label> 
+
+                </div>  
+
+        {# Carousel itself #}
+        <main id="carousel">
+            
+            {% for project in projects %}
+                <div class="item">    
+                    <h5> {{ project.title }}</h5>
+                   	{% if vich_uploader_asset(project,'coverFile') %}
+							<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('vignette') }}" id="object-position-1" alt="image d'un projet">
+						{% endif %}
+                    <p>{{ project.description|u.truncate(15,'Lire la suite...') }}</p>
+                </div>
+            {% endfor %}
+         
+        </main>
+    </section>
 {% endblock %}

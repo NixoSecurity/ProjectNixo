@@ -28,6 +28,13 @@
     
      {% block body %}
 
+
+    {{ include('component/_navbar.html.twig') }}
+    
+
+    {{ render(controller(
+        'App\\Controller\\ProjectController::index'
+    )) }}
        
 
      
