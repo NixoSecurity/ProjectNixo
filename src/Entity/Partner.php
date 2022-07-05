@@ -19,6 +19,9 @@ class Partner
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $url;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private $recommendation;
 
@@ -33,6 +36,8 @@ class Partner
 
     #[ORM\Column(type: 'date', nullable: true)]
     private $recoDate;
+
+
 
     public function getId(): ?int
     {
@@ -119,6 +124,18 @@ class Partner
     public function setRecoDate(?\DateTimeInterface $recoDate): self
     {
         $this->recoDate = $recoDate;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

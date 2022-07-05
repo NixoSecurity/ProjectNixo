@@ -17,7 +17,8 @@ class PartnerFixtures extends Fixture
         {
         $partner = new Partner();
         $partner->setTitle($faker->company);
-        $partner->setCover('partnerlogo.png');
+        $partner->setCover('logo.png');
+        $partner->setUrl('https://nixo-dvt.fr/');
         $partner->setRecommendation($faker->realText(200, 2));
         $partner->setFirstname($faker->firstName);
         $partner->setLastname($faker->lastName);

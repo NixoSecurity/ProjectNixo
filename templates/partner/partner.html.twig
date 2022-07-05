@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partner{% endblock %}
+
+{% block body %}
+
+ <section id="prof-service">
+  
+        <div class="container">
+            <h2 class="section-title text-start">Ils nous font confiance</h2>
+        </div>
+
+        <div class="container">
+        
+        {# Recommendations slider #}
+
+	<section class="partners">
+
+		<div id="partnerCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				{% for partner in partners %}
+
+                	<div class="carousel-item {% if loop.index == 1 %} active {% endif %} ">
+									
+						{# {% if vich_uploader_asset(project,'coverFile') %}
+							<img class="portfolio-img" src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('thumbnail') }}" id="object-position-1" alt="image d'un projet">
+						{% endif %} #}
+                      <div class="row">
+                        <div class="col-2">
+                            <img class="carousel-img" src="{{ asset('images/Logo.png') }}"  alt="logo image">
+                        </div>      
+                        <div class="col-2">                           
+                        </div>                 
+                        <div class="col-8 carousel-text ">
+                            <h3>{{partner.firstname}}  {{partner.lastname}}</h2>
+                            <h4>{{partner.jobTitle}}</h3>
+                            <p>{{partner.recommendation}}</p>
+						</div>
+
+                     </div>
+
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	</section>
+
+
+
+
+
+
+       
+
+        </div>    
+   </section>
+
+
+    <section id="prof-service">
+  
+        <div class="container">
+            <h2 class="section-title text-center">Nos partenaires</h2>
+        </div>
+
+        <div class="container">   
+
+        {# Partners' logos slider #}
+
+    <div class="slider"> 
+        <div class="marquee">
+            <ul class="marquee-content">
+           
+            {# "{{ asset('images/icons/audit.png') }}" #}
+                <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>
+
+                 <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>
+         
+            </ul>
+        </div>
+  
+    </div>    
+   </section> 
+
+{% endblock %}

@@ -13,7 +13,7 @@ class ClientFixtures extends Fixture
         for ($i = 0; $i < 2; $i++ )
         {
         $client = new Client();
-        $client->setName('client_' . $i);
+        $client->setName('professionnel');
         $this->addReference("client_$i",$client);
 
         $manager->persist($client);
