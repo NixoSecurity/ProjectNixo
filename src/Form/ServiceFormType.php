@@ -26,8 +26,15 @@ class ServiceFormType extends AbstractType
                 'label' => 'Description',
                 'required' => False
             ])
-            ->add('clients',ServiceClientEntityType::class,[
-                'class'=>Client::class
+            ->add('clients',EntityType::class,[
+                'class' => Client::class,
+                'choice_label' =>'name',
+                'label' => 'Type de client associé',
+                'required' => True, 
+                'mapped' => false,
+                 'multiple' =>true,
+                // 'expanded' => true,
+
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer '
@@ -42,3 +49,6 @@ class ServiceFormType extends AbstractType
         ]);
     }
 }
+//->add('clients',ServiceClientEntityType::class,[
+    //     'class'=>Client::class
+    // ])
