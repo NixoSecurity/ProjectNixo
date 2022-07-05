@@ -23,16 +23,23 @@
         {% endblock %}
     </head>
     <body>
-    <div class="container">
-   
+    {# <div class="container">
+    #}
     
      {% block body %}
 
-         {{ include('components/_navbar.html.twig')}}
+
+    {{ include('component/_navbar.html.twig') }}
+    
+
+    {{ render(controller(
+        'App\\Controller\\ProjectController::index'
+    )) }}
+       
 
      
      {% endblock %}
  
-        </div>
+        {# </div> #}
     </body>
 </html>
