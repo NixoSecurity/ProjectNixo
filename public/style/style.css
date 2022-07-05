@@ -20,37 +20,51 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: 0;
+    background-color: var(--bg-white);
     
 }
 
-.portfolio {
+/* .portfolio {
     background-color: var(--bg-primary);
-}
+} */
+
+/* #partnerCarousel{
+  height: 40vh;
+} */
 
 .carousel-inner {
-    background-color: var(--bg-primary) ;
-    height: 70vh;
+    background-color: var(--bg-white) ;
+    /* background-color: var(--details-3) ; */
+    height: 30vh;
 }
 
-.portfolio-img {
-    height: 50vh;
+.carousel-img {
+    width: 100%;
     object-fit: fill;
-    margin-bottom: 2rem;
+    padding: 30px;
 }
 
-.portfolio-title {
+.carousel-title {
     color: var(--text-color-reverse);
     font-size: 2rem;
     font-family: var(--title-font);    
 }
 
-.portfolio-text {
-    color: var(--text-color-reverse);
+.carousel-text {
+    color: var(--text-color);
     font-size: 1rem;
     font-family: var(--text-font);  
-    margin-block-start: 2em !important;
+    /* margin-block-start: 2em !important;
     margin-inline-start: 20em !important;
-    margin-inline-end: 20em !important;
+    margin-inline-end: 20em !important; */
+}
+
+.carousel-text h3, h4, p {
+  padding-bottom: 1.2rem;
+}
+
+.carousel-text p {
+  font-style: italic;
 }
 
  #portfolioCarousel {
