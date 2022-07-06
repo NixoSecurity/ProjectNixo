@@ -20,8 +20,8 @@ class Client
 
    
 
-    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'clients')]
-    #[ORM\JoinTable(name:'service_client')]
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'clients')]
+    // #[ORM\JoinTable(name:'service_client')]
     private $services;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Project::class)]

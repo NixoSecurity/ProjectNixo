@@ -23,7 +23,7 @@ class Service
 
    
 
-    #[ORM\ManyToMany(targetEntity: Client::class, inversedBy: 'services')]
+    #[ORM\ManyToMany(targetEntity: Client::class, mappedBy: 'services')]
     private $clients;
 
     public function __construct()
@@ -78,6 +78,7 @@ class Service
     {
         if (!$this->clients->contains($client)) {
             $this->clients[] = $client;
+            $client->addService($this);
         }
 
         return $this;

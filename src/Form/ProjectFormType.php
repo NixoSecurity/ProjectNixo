@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Client;
 use App\Entity\Project;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -45,7 +46,7 @@ class ProjectFormType extends AbstractType
                 'required' => False
             ])
             ->add('client', EntityType::class, [
-                'class' => Client²::class,
+                'class' => Client::class,
                 'choice_label' => 'name',
                 'label' => 'Type de client',
                 'required' => False

@@ -126,7 +126,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($project);
+            
             $projectRepository->add($project, true);
 
             $this->addFlash('success', 'Votre projet à bien été enregistré !');
@@ -196,7 +196,7 @@ class AdminController extends AbstractController
             dd($service);
             $serviceRepository->add($service, true);
 
-            $this->addFlash('success', 'Votre projet à bien été enregistré !');
+            $this->addFlash('success', 'Votre service à bien été enregistré !');
 
           
            
