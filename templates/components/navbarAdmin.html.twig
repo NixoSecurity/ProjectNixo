@@ -7,7 +7,9 @@
 
 		<div class="col-6 text-center py-5 ">
 			<ul class="navbar-nav">
-
+<li>
+					<a class="nav-link px-4" href="{{ path('app_admin')}}">tableau de bord</a>
+				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Categories
@@ -15,6 +17,9 @@
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li>
 							<a class="dropdown-item" href="{{ path('app_admin_newCat')}}">Nouvelle categorie</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_category')}}">Toutes categorie</a>
 						</li>
 
 					</ul>
@@ -40,11 +45,13 @@
 						</li>
 
 					</ul>
+				
 				</li>
 
 				<li>
 					<a class="nav-link px-4" href="#">Contact</a>
 				</li>
+				
 			</ul>
 		</div>
 

@@ -33,7 +33,7 @@ class AdminController extends AbstractController
         );
         $services = $paginatorInterface->paginate(
             $serviceRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page',1),6
         );
        
 
@@ -193,10 +193,10 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($service);
+            // dd($service);
             $serviceRepository->add($service, true);
 
-            $this->addFlash('success', 'Votre service à bien été enregistré !');
+            $this->addFlash('success', 'Votre service à bien été enregistré pour le client: '.$service->getClient()->getName());
 
           
            
