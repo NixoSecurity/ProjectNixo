@@ -31,8 +31,7 @@ class ServiceFormType extends AbstractType
                 'choice_label' =>'name',
                 'label' => 'Type de client associé',
                 'required' => False,
-                'mapped' => false
-
+                'mapped' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer '
