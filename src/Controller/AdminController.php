@@ -154,7 +154,7 @@ class AdminController extends AbstractController
           
             $projectRepository->add($project, true);
 
-            $this->addFlash('success', 'Le project :' . $project->gettitle() . 'mis a jour !');
+            $this->addFlash('success', 'Le project :' . $project->gettitle() . ' mis a jour !');
             
             return $this->redirectToRoute('app_admin');
         }
@@ -175,12 +175,10 @@ class AdminController extends AbstractController
         
            $projectRepository->remove($project,true);
             $this->addFlash('success', 'Le projet à bien été supprimée');
-            $success = true;
+            
         }
 
-        return $this->redirectToRoute('app_admin', [
-            'success' => $success
-        ]);
+        return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/admin/project', name: 'app_adminProject')]
@@ -201,6 +199,21 @@ class AdminController extends AbstractController
     /**
  * CRUD Service
  */
+
+#[Route('/admin/service', name: 'app_adminService')]
+public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+{
+    $services = $paginatorInterface->paginate( 
+        $serviceRepository->findAll(),
+        $request->query->getInt('page',1),5
+    );
+  
+    return $this->render('admin/serviceAll.html.twig', [
+        'services' => $services,
+        
+    ]);
+  
+}
 #[Route('/admin/service/new', name: 'app_admin_newService')]
     public function addService(Request $request,ServiceRepository $serviceRepository): Response
     {

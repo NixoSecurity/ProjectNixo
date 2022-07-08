@@ -57,7 +57,7 @@ class ProjectFormType extends AbstractType
                     'imagine_pattern' => 'vignette', // Applique une configuration LiipImagine sur l'image
                     'download_label' => false, // Enleve le lien de telechargement
                     'delete_label' => 'Cocher pour supprimer l\'image',
-                    'required'=> false
+                    
                 ])
             
             ->add('save', SubmitType::class, [
