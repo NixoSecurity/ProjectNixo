@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Partner;
+use DateTimeImmutable;
 use Faker;
 
 class PartnerFixtures extends Fixture
@@ -23,7 +24,7 @@ class PartnerFixtures extends Fixture
         $partner->setFirstname($faker->firstName);
         $partner->setLastname($faker->lastName);
         $partner->setJobTitle($faker->word);
-        $partner->setRecoDate($faker->dateTimeBetween('-2 years'));
+        $partner->setRecoDate(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-6 month')));
         
         $manager->persist($partner);
         }
