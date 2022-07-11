@@ -27,35 +27,19 @@
         {% endblock %}
     </head>
     <body>
-<<<<<<< HEAD
   
-   
-    
-     {% block body %}
-
-         {{ include('components/_navbar.html.twig')}}
-     
-     {% endblock %}
- 
-=======
-    {# <div class="container">
-    #}
     
      {% block body %}
 
 
-    {{ include('component/_navbar.html.twig') }}
+    {{ include('components/_navbar.html.twig') }}
     
 
-    {{ render(controller(
-        'App\\Controller\\ProjectController::index'
-    )) }}
+    
        
 
      
      {% endblock %}
  
-        {# </div> #}
->>>>>>> dev
     </body>
 </html>
