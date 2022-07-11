@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
 :root { 
-    --title-font: 'Libre Baskerville', serif;
+    --title-font: 'Oswald', sans-serif;
     --text-font: 'Source Sans Pro', sans-serif; 
+    --navbar-height: 15vh;
   
-    /* vs4 */
     --bg-primary: #011638;
     --bg-secondary:#104F55;
     --details:#A5A5A5 ;
@@ -12,26 +14,161 @@
     --btn-color: #D3A656;
     --details-2:#5C9EAD;
     --details-3: #BAABBD;
-
 }
 
-.logo {
-    width: 40%;
+* {
+    font-family: var(--text-font);
 }
-
-nav {
+.nav-space {
+    height: var(--navbar-height);
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
     background-color: var(--bg-primary);
-    /* background-image: url('/images/Fond.jpg'); */
 }
-
-.nav-link {
-    color: var(--text-color-reverse) ;
-    text-transform: uppercase;
-    transition: transform 0.2s;   
+#navbar {
+    position: fixed;
+    height: var(--navbar-height);
+    background-color: var(--bg-primary);
+    left: 0;
+    right: 0;    
+  } 
+.navbar-item {
+    margin: 0.4em;
+    width: 100%;
+  }
+.home-link,
+.navbar-link {
+    text-decoration: none;
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;  
+    font-family: 'Oswald', sans-serif; 
+    letter-spacing: 0.05em;
+ }
+.navbar-link {
+    justify-content: start;
+    width: 100%;
+    padding: 0.4em 0.8em;
+    color: var(--text-color-reverse);  
+    transition: 0.2s ;
 }
-
-.nav-link:hover {
+.navbar-link:is(:focus, :hover) {
     color: var(--btn-color);
-    transform: scale(1.1); 
+    transition: 0.5s;
 }
+.navbar-logo {
+    background-image: url(../images/Logo.png);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    width: 20vh;
+    height: 10vh;
+    margin-inline-start: 0.5em;
+}
+#navbar-toggle {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#navbar-menu {
+    position: fixed;
+    display: none;
+    top: var(--navbar-height); 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%
+}
+.visible {
+    display: block !important;
+}
+.navbar-links {
+    list-style: none;
+    position: absolute;
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+    right: 0;
+  }
+#toggle-icon {
+    cursor: pointer;
+    margin-right: 3em;
+    display: table;
+}
+.bar1, .bar2, .bar3 {
+    background-color: var(--text-color-reverse);
+    width: 40px;
+    height: 4px;
+    transition: 0.5s;
+    margin: 7px 0;
+}
+.rotate-icon .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-8px, 6px);
+    transform: rotate(-45deg) translate(-8px, 6px);
+    background-color: var(--btn-color);
+}
+.rotate-icon .bar2 {
+    opacity: 0;
+    background-color: var(--btn-color);
+}
+.rotate-icon .bar3 {
+    -webkit-transform: rotate(42deg) translate(-9px, -8px);
+    transform: rotate(42deg) translate(-9px, -8px);
+    background-color: var(--btn-color);
+}
+
+.bar1:is(:focus, :hover),
+.bar2:is(:focus, :hover), 
+.bar3:is(:focus, :hover) {
+  background-color: var(--btn-color);
+} 
+
+  /* Tablet and desktop view */
+  @media screen and (min-width: 959px) {
+    #toggle-icon {
+      display: none;
+    } 
+    #navbar-menu  {
+      visibility: visible;
+      opacity: 1;
+      position: static;
+      display: block;
+      height: 100%;
+    }  
+    .navbar-links     {
+      margin: 0;
+      padding: 0;
+      position: static;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+    }          
+    .navbar-link:is(:focus, :hover) {      
+        transform: scale(1.1 );
+        transition: 0.5s;
+    }
+    .navbar-logo {
+      margin-inline-start: 0.5em;
+    }
+  }
+
+
+
+
+
+
+
+
+
 
