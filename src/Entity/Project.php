@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
+// use App\Entity\Client;
 use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[Vich\Uploadable]
@@ -52,11 +52,6 @@ class Project
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
     private $client;
 
-    public function __construct()
-    {
-        $this->client = new ArrayCollection();
-        
-    }
 
     public function getId(): ?int
     {
@@ -92,7 +87,7 @@ class Project
         return $this->cover;
     }
 
-    public function setCover(string $cover): self
+    public function setCover(?string $cover): self
     {
         $this->cover = $cover;
 
@@ -152,7 +147,7 @@ class Project
         return $this->coverFile;
     }
 
-    public function setCoverFile(?File $coverFile=null): self
+    public function setCoverFile(?File $coverFile = null): void
     {
         $this->coverFile = $coverFile;
 
@@ -161,7 +156,7 @@ class Project
             // otherwise the event listeners won't be called and the file is lost
             $this->updated_at = new \DateTimeImmutable();
         }
-        return $this;
+       
     }
 
    

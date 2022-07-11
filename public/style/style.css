@@ -4,42 +4,6 @@
     --title-font: 'Libre Baskerville', serif;
     --text-font: 'Source Sans Pro', sans-serif; 
   
-    /* vs1 */
-    /* --bg-primary: #081D38;
-    --bg-secondary:#407DC0;
-    --details:#4D4D4D ;
-    --bg-white: #FDFFF7; 
-    --text-color:#081D38;
-    --text-color-reverse: #FDFFF7;
-    --btn-color: #F55D3E; 
-    --details-2:#407DC0;
-    --details-3:#407DC0 ; */
-   
-
-    /* vs2 */
-    /* --bg-primary: #081D38;
-    --bg-secondary:#A5A5A5;
-    --details:#BC8396;
-    --bg-white: #FFFFFF; 
-    --text-color:#081D38;
-    --text-color-reverse: #FFFFFF;
-    --btn-color: #FF8200;
-    --details-2:#BC8396;
-    --details-3:#A5A5A5; */
-   
-
-     /* vs3 */
-    /* --bg-primary: #172F4F;
-    --bg-secondary:#2E6171  ;
-    --details:#A5A5A5 ;
-    --bg-white: #FFFFFF; 
-    --text-color:#172F4F;
-    --text-color-reverse: #FFFFFF;
-    --btn-color: #F7D002; 
-    --details-2:#2E6171  ;
-    --details-3:#A5A5A5 ; */
-
-
      /* vs4 */
     --bg-primary: #011638;
     --bg-secondary:#104F55;
@@ -56,37 +20,51 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: 0;
+    background-color: var(--bg-white);
     
 }
 
-.portfolio {
+/* .portfolio {
     background-color: var(--bg-primary);
-}
+} */
+
+/* #partnerCarousel{
+  height: 40vh;
+} */
 
 .carousel-inner {
-    background-color: var(--bg-primary) ;
-    height: 70vh;
+    background-color: var(--bg-white) ;
+    /* background-color: var(--details-3) ; */
+    height: 30vh;
 }
 
-.portfolio-img {
-    height: 50vh;
+.carousel-img {
+    width: 100%;
     object-fit: fill;
-    margin-bottom: 2rem;
+    padding: 30px;
 }
 
-.portfolio-title {
+.carousel-title {
     color: var(--text-color-reverse);
     font-size: 2rem;
     font-family: var(--title-font);    
 }
 
-.portfolio-text {
-    color: var(--text-color-reverse);
+.carousel-text {
+    color: var(--text-color);
     font-size: 1rem;
     font-family: var(--text-font);  
-    margin-block-start: 2em !important;
+    /* margin-block-start: 2em !important;
     margin-inline-start: 20em !important;
-    margin-inline-end: 20em !important;
+    margin-inline-end: 20em !important; */
+}
+
+.carousel-text h3, h4, p {
+  padding-bottom: 1.2rem;
+}
+
+.carousel-text p {
+  font-style: italic;
 }
 
  #portfolioCarousel {
@@ -134,8 +112,6 @@ body {
 }
 
 /* carousel portfolio 2 */
-
-
 
 section .portfolio-2{
     height: 600px;
@@ -356,6 +332,82 @@ section .portfolio-2{
     border-radius: 50%;
     background: white;
   }
+
+/* GENERAL */
+#prof-service, #prof-realisations {
+  margin-top: 10vh;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--text-color);
+  font-family: var(--title-font);
+  padding-bottom: 10vh;;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-family: var(--title-font);
+}
+
+/* INTRODUCTION */
+
+.intro-prof {
+  background-image: url(../images/prof-surveillance.jpg);
+  height: 70vh;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  position: relative;
+}
+
+.intro-particulier {
+  background-image: url(../images/video-surveillance-maison.jpg);
+  height: 70vh;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  position: relative;
+}
+
+.btn-prof, .btn-particulier {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* PROFESSIONNEL */
+
+/* Service card */
+.icon-container {
+  width: 300px;
+  height: 300px;
+  background-color: var(--details);
+  border-radius: 50%;
+}
+
+.icon-img {
+  object-position: 50% 50%;
+  width: 100%;
+  padding: 5rem;
+}
+
+/* Realistaions Card */
+.realisation-project-img{
+  width: 100%;
+}
+
+.realisation-img-card {
+  padding: 0;
+}
+
+.realisation-description-card {
+  padding: 0 2rem;
+}
+
+.row-realisation:nth-child(odd) {
+  text-align: right !important;
+ }
 
 
 

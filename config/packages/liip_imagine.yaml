@@ -22,9 +22,23 @@ liip_imagine:
             quality: 85
             filters:
                 thumbnail: { size: [200, 100], mode: outbound }
+       
         details:
             quality: 85
             filters:
                 thumbnail: { size: [425, 375], mode: 'outbound' }
                 background: { size: [600, 450], position: center, color: '#000000' }
+        coverFile:
+            quality: 85
+            filters:
+                thumbnail: { size: [200, 100], mode: outbound }      
+        logo:
+            quality: 100
+            filters:
+                thumbnail: { size: [300, 300], mode: 'inset'}
+                background: { size: [400, 400], position: center, color: '#F2F2F2'}
+        # logoreco:
+        #     quality: 100   
+        #     filters:
+        #         thumbnail: {size: [1000, 1000], mode: 'outbound'}  
               

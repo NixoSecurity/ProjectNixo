@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partner{% endblock %}
+
+{% block body %}
+
+ <section id="prof-service">
+  
+        <div class="container">
+            <h2 class="section-title text-start">Ils nous font confiance</h2>
+        </div>
+
+        <div class="container">
+        
+        {# Recommendations slider #}
+	<section class="partners">
+
+		<div id="partnerCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				{% for partner in partners %}
+
+                    {# Slider is activated in case loop.index = 1 #}
+                	<div class="carousel-item {% if loop.index == 1 %} active {% endif %} ">
+									
+                        <div class="row">
+                                <div class="col-2">
+                                {# Images rendered from public/images/partner folder with help of VichUploaderBundle connected to admin crud system #}
+                                    {# {% if vich_uploader_asset(partner,'coverFile') %}
+                                    <img class="carousel-img" src="{{ vich_uploader_asset(partner,'coverFile')|imagine_filter('logoreco') }}"  alt="logo image">
+                                    {% endif %}  #}
+                                    <img class="partner-recologo" src="{{ asset('images/partners/' ~ partner.cover) }}" alt="">
+                                    {# <pre>
+                                    {{ dump(partner.cover) }}
+                                    </pre> #}
+                                </div>      
+                                <div class="col-2">                           
+                                </div>                 
+                                <div class="col-8 carousel-text ">
+                                    <h3>{{partner.firstname}}  {{partner.lastname}}</h2>
+                                    <h4>{{partner.jobTitle}}</h3>
+                                    <p>{{partner.recommendation}}</p>
+                                </div>
+
+                        </div>
+
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	</section>       
+
+        </div>    
+   </section>
+
+
+    <section id="prof-service">
+  
+        <div class="container">
+            <h2 class="section-title text-center">Nos partenaires</h2>
+        </div>
+
+        <div class="container">   
+
+        {# Partners' logos slider #}
+
+    <div class="slider"> 
+        <div class="marquee">
+            <ul class="marquee-content">
+            {% for partner in partners %}    
+
+                {# Partner logo space in slider #}       
+                <li>     
+                    {# Logo images are clicable, opening in new windo leading to partners sebsite            #}
+                    <a href="{{ asset(partner.url) }}" target=”_blank”>
+                    {# Images rendered from public/images/partner folder with help of VichUploaderBundle connected to admin crud system #}
+                     {% if vich_uploader_asset(partner,'coverFile') %}
+                     <img class="partner-logo" src="{{ vich_uploader_asset(partner,'coverFile')|imagine_filter('logo') }}" >
+                     {% else %}
+                       <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="nixo logo">
+                     {% endif %} 
+                    </a>
+                </li>                           
+
+                {# <li>
+                    <a href="https://nixo-dvt.fr/" target=”_blank”>
+                        <img class="partner-logo" src="{{ asset('images/Logo.png') }}" alt="">
+                    </a>
+                </li>  #}            
+
+            {% endfor %}
+         
+            </ul>
+        </div>
+  
+    </div>    
+   </section> 
+
+
+{# PARTNER ADMIN SECTION #}
+
+{# TABLE LIST of Partners #}
+
+    <h2>Partenaires</h2>
+    <table class="table">
+        <thead>
+        
+            <tr>
+                <td>Nom d'entreprise</td>        
+                <td>URL</td>
+                <td>Text de recommendation</td>
+                <td>Prenom</td>
+                <td>Nom</td>
+                <td>Titre</td>
+                <td>Date de reco</td>
+                <td>Image de logo</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partner in partners %}
+            <tr>
+                <td>{{ partner.title }}</td>
+                <td>{{ partner.url }}</td>
+                <td>{{ partner.recommendation }}</td>
+                <td>{{ partner.firstname }}</td>
+                <td>{{ partner.lastname }}</td>
+                <td>{{ partner.jobTitle }}</td>
+                <td>{{ partner.recoDate|date('d.m.Y') }}</td>
+                <td>{{ partner.cover }}</td>
+                <td>
+                <a type="button" class="btn btn-warning" title="Editer" href="{{ path('app_admin_editPartner' , {id: partner.id })}}">Editer</a>
+                        <form
+                                action="{{ path('app_admin_deletePartner', { id: partner.id } ) }}" method="post" class="d-inline">
+                                {# csrf_token().. creation d'un jeton unique  #}
+                                <input type="hidden" name="token" value="{{ csrf_token('delete-partner-'~ partner.id) }}">
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewbox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </button>
+                            </form>	
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>    
+    </table>
+{% endblock %}

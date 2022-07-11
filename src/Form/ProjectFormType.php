@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Client;
 use App\Entity\Project;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +36,7 @@ class ProjectFormType extends AbstractType
             ])
 
             ->add('city', TextType::class, [
-                'label' => 'Nom de la ville',
+                'label' => 'Nom de la ville',   
                 'required' => False
             ])
             ->add('category', EntityType::class, [
@@ -44,13 +45,19 @@ class ProjectFormType extends AbstractType
                 'label' => 'Nom de la category',
                 'required' => False
             ])
+            ->add('client', EntityType::class, [
+                'class' => Client::class,
+                'choice_label' => 'name',
+                'label' => 'Type de client',
+                'required' => False
+            ])
             ->add(
                 'coverFile', VichImageType::class, [
                     'label' => 'Image',
                     'imagine_pattern' => 'vignette', // Applique une configuration LiipImagine sur l'image
                     'download_label' => false, // Enleve le lien de telechargement
                     'delete_label' => 'Cocher pour supprimer l\'image',
-                    'required'=> false
+                    
                 ])
             
             ->add('save', SubmitType::class, [
