@@ -19,8 +19,10 @@
 * {
     font-family: var(--text-font);
 }
+
 .nav-space {
     height: var(--navbar-height);
+
 }
 .navbar-container {
     display: flex;
@@ -31,6 +33,7 @@
 }
 #navbar {
     position: fixed;
+    z-index: 1;
     height: var(--navbar-height);
     background-color: var(--bg-primary);
     left: 0;
