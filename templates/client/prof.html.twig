@@ -3,8 +3,8 @@
 {% block title %}Proffessionnel{% endblock %}
 
 {% block body %}
-   {{ include('components/_navbar.html.twig')}}
-   {{ include('components/_intro.html.twig')}}
+    {{parent()}}
+    {{ include('component/_intro.html.twig')}}
 
    {# Section Proffessionals' Services.
    Method to be created in Service Controller, and view with relevant method rendered from Service view.

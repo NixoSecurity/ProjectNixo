@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root { 
-    --title-font: 'Libre Baskerville', serif;
-    --text-font: 'Source Sans Pro', sans-serif; 
+
+  --title-font: 'Oswald', sans-serif;
+  --text-font: 'Source Sans Pro', sans-serif; 
+    /* --title-font: 'Montserrat', sans-serif; 
+    --text-font: 'Hind', sans-serif; */  
+    --navbar-height: 15vh;
   
-     /* vs4 */
     --bg-primary: #011638;
     --bg-secondary:#104F55;
     --details:#A5A5A5 ;
@@ -22,6 +26,9 @@ body {
     box-sizing: 0;
     background-color: var(--bg-white);
     
+}
+.admin-nav-logo {
+  width: 50%;
 }
 
 /* .portfolio {
@@ -408,6 +415,9 @@ section .portfolio-2{
 .row-realisation:nth-child(odd) {
   text-align: right !important;
  }
+
+
+
 
 
 
