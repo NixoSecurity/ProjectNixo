@@ -1,11 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Proffessionnel{% endblock %}
+{% block title %}Particuliers{% endblock %}
 
 {% block body %}
 {{parent()}}
 
 
+ <section id="partic-category">
+  
+        <div class="container">
+            <h2 class="section-title text-center">Nos Solutions</h2>
+        </div>
+
+        <div class="container">        
+                {# Category cards pour Particuliers #}
+                <div class="row mx-auto d-flex justify-content-around">
+                    {# {% for .. in .. %} #}
+                     
+                        <div class="col-12 col-lg-6 col-xl-6 my-4">
+                            <div class="card p-3 d-flex justify-content-center align-items-center text-center shadow border-0" >
+                                {# Icon round image container #}
+                                    <div class="icon-container">
+                                        <img class="icon-img" src="{{ asset('images/icons/alarm.svg') }}"  alt="picture  service name">																					
+                                    </div>
+                                    <h3 class="pt-5 pb-2 card-title ">
+                                       Domotique
+                                    </h3>                                                             
+                                </div>                                                
+                        </div>
+
+                         <div class="col-12 col-lg-6 col-xl-6 my-4">
+                            
+                                <div class="card p-3 d-flex justify-content-center align-items-center text-center shadow border-0" >
+                                {# Icon round image container #}
+                                    <div class="icon-container">
+                                        <img class="icon-img" src="{{ asset('images/icons/alarm.svg') }}"  alt="picture  service name">																					
+                                    </div>
+                                    <h3 class="pt-5 pb-2 card-title ">
+                                        Contrôle d'accès
+                                    </h3>                                						
+                                </div>                                               
+                        </div>
+
+
+                         <div class="col-12 col-lg-6 col-xl-6 my-4">                            
+                                <div class="card p-3 d-flex justify-content-center align-items-center text-center shadow border-0" >
+                                {# Icon round image container #}
+                                    <div class="icon-container">
+                                        <img class="icon-img" src="{{ asset('images/icons/alarm.svg') }}"  alt="picture  service name">																					
+                                    </div>
+                                    <h3 class="pt-5 pb-2 card-title ">
+                                     Systèmes d'alarme
+                                    </h3>                                                                				
+                                </div>            
+                        </div>
+
+
+                         <div class="col-12 col-lg-6 col-xl-6 my-4">                            
+                                <div class="card p-3 d-flex justify-content-center align-items-center text-center shadow border-0" >
+                                {# Icon round image container #}
+                                    <div class="icon-container">
+                                        <img class="icon-img" src="{{ asset('images/icons/alarm.svg') }}"  alt="picture  service name">																					
+                                    </div>
+                                    <h3 class="pt-5 pb-2 card-title ">
+                                        Vidéosurveillance
+                                    </h3>                                                            
+                                </div>                                                
+                        </div>
+                    {# {% endfor %} #}                       
+                </div>
+            </div>    
+   </section>
 
 
 {% endblock %}
