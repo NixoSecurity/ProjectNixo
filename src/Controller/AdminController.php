@@ -23,7 +23,7 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
     {
-        $projects = $paginatorInterface->paginate(
+        $projects = $paginatorInterface->paginate( 
             $projectRepository->findAll(),
             $request->query->getInt('page',1),5
         );
@@ -33,7 +33,7 @@ class AdminController extends AbstractController
         );
         $services = $paginatorInterface->paginate(
             $serviceRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page',1),6
         );
        
 
@@ -42,6 +42,7 @@ class AdminController extends AbstractController
             'cats' => $cats, 
             'services' => $services
         ]);
+      
     }
 
 /**
@@ -153,7 +154,7 @@ class AdminController extends AbstractController
           
             $projectRepository->add($project, true);
 
-            $this->addFlash('success', 'Le project :' . $project->gettitle() . 'mis a jour !');
+            $this->addFlash('success', 'Le project :' . $project->gettitle() . ' mis a jour !');
             
             return $this->redirectToRoute('app_admin');
         }
@@ -174,17 +175,45 @@ class AdminController extends AbstractController
         
            $projectRepository->remove($project,true);
             $this->addFlash('success', 'Le projet à bien été supprimée');
-            $success = true;
+            
         }
 
-        return $this->redirectToRoute('app_admin', [
-            'success' => $success
+        return $this->redirectToRoute('app_admin');
+    }
+
+    #[Route('/admin/project', name: 'app_adminProject')]
+    public function ProjectAll(ProjectRepository $projectRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+    {
+        $projects = $paginatorInterface->paginate( 
+            $projectRepository->findAll(),
+            $request->query->getInt('page',1),5
+        );
+      
+        return $this->render('admin/ProjectAll.html.twig', [
+            'projects' => $projects,
+            
         ]);
+      
     }
 
     /**
  * CRUD Service
  */
+
+#[Route('/admin/service', name: 'app_adminService')]
+public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+{
+    $services = $paginatorInterface->paginate( 
+        $serviceRepository->findAll(),
+        $request->query->getInt('page',1),5
+    );
+  
+    return $this->render('admin/serviceAll.html.twig', [
+        'services' => $services,
+        
+    ]);
+  
+}
 #[Route('/admin/service/new', name: 'app_admin_newService')]
     public function addService(Request $request,ServiceRepository $serviceRepository): Response
     {
@@ -193,10 +222,10 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($service);
+            // dd($service);
             $serviceRepository->add($service, true);
 
-            $this->addFlash('success', 'Votre projet à bien été enregistré !');
+            $this->addFlash('success', 'Votre service à bien été enregistré pour le client: '.$service->getClient()->getName());
 
           
            
@@ -206,6 +235,47 @@ class AdminController extends AbstractController
 
         return $this->render('service/newservice.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/admin/service/edit/{id}', name: 'app_admin_editService', requirements: ['id' => '\d+'])]
+    public function updateService(Service $service, Request $request, ServiceRepository $serviceRepository): Response
+    {
+
+        $form = $this->createForm(ServiceFormType::class, $service);
+        $form->handleRequest($request);
+       
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+          
+            $serviceRepository->add($service, true);
+
+            $this->addFlash('success', 'Le Service :' . $service->getName() . 'mis a jour !');
+            
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('service/newService.html.twig', [
+            'form' => $form->createView(),
+
+        ]);
+    }
+
+    #[Route('/admin/service/delete/{id}', name: 'app_admin_deleteService', requirements: ['id' => '\d+'], methods: ['POST'])]
+    public function deleteservice(Service $service, Request $request, ServiceRepository $serviceRepository): Response
+    {
+
+        $tokenCsrf = $request->request->get('token');
+        $success= false;
+        if ($this->isCsrfTokenValid('delete-service-'. $service->getId(), $tokenCsrf)) {
+        
+           $serviceRepository->remove($service,true);
+            $this->addFlash('success', 'Le service à bien été supprimée');
+            $success = true;
+        }
+
+        return $this->redirectToRoute('app_admin', [
+            'success' => $success
         ]);
     }
 
