@@ -27,22 +27,9 @@ body {
     background-color: var(--bg-white);
     
 }
-.test-title{
-  /* font-family: 'Oswald', sans-serif;  */
-  font-family: var(--title-font);
+.admin-nav-logo {
+  width: 50%;
 }
-
-.test-text{
-  /* font-family: 'Source Sans Pro', sans-serif; */
-  font-family: var(--text-font);
-}
-
-.test {
-  background-color: var(--details-2) ;
-  height: 50vh;
-  width: 100%;
-}
-
 
 /* .portfolio {
     background-color: var(--bg-primary);
