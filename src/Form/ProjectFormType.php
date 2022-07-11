@@ -36,7 +36,7 @@ class ProjectFormType extends AbstractType
             ])
 
             ->add('city', TextType::class, [
-                'label' => 'Nom de la ville',
+                'label' => 'Nom de la ville',   
                 'required' => False
             ])
             ->add('category', EntityType::class, [

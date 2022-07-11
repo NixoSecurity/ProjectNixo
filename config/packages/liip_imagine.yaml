@@ -21,14 +21,31 @@ liip_imagine:
         vignette:
             quality: 85
             filters:
+<<<<<<< HEAD
                 thumbnail: { size: [200, 100], mode: outbound }
        
+=======
+                thumbnail: { size: [200, 100], mode: outbound}              
+>>>>>>> dev
         details:
             quality: 85
             filters:
                 thumbnail: { size: [425, 375], mode: 'outbound' }
                 background: { size: [600, 450], position: center, color: '#000000' }
+<<<<<<< HEAD
         coverFile:
             quality: 85
             filters:
                 thumbnail: { size: [200, 100], mode: outbound }      
+=======
+        logo:
+            quality: 100
+            filters:
+                thumbnail: { size: [300, 300], mode: 'inset'}
+                background: { size: [400, 400], position: center, color: '#F2F2F2'}
+        # logoreco:
+        #     quality: 100   
+        #     filters:
+        #         thumbnail: {size: [1000, 1000], mode: 'outbound'}  
+              
+>>>>>>> dev

@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proffessionnel{% endblock %}
+
+{% block body %}
+   {{ include('components/_navbar.html.twig')}}
+   {{ include('components/_intro.html.twig')}}
+
+   {# Section Proffessionals' Services.
+   Method to be created in Service Controller, and view with relevant method rendered from Service view.
+   The Code below normally goes to Services Template view. #}
+
+   <section id="prof-service">
+  
+        <div class="container">
+            <h2 class="section-title text-center">Services</h2>
+        </div>
+
+        <div class="container">
+        
+                {# Service cards pour Prof #}
+                <div class="row mx-auto d-flex justify-content-around">
+                    {# {% for service in services %} #}
+
+                    {# {{ asset('images/'~ service.cover) }}
+                    {{service.name}}
+                    {{service.description|u.truncate(50, '') }} #}
+
+                        <div class="col-12 col-lg-6 col-xl-4 my-4">
+                            
+                                <div class="card p-3 d-flex justify-content-center align-items-center text-center shadow border-0" >
+
+                                {# Icon round image container #}
+                                    <div class="icon-container">
+                                        <img class="icon-img" src="{{ asset('images/icons/audit.png') }}"  alt="picture  service name">																					
+                                    </div>
+
+                                    <h3 class="pt-5 pb-2 card-title">
+                                        service name
+                                    </h3>
+                                                                    
+                                    <p class="py-4">
+                                    Service description | Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis adipisci numquam quibusdam! Quo et harum accusamus suscipit repellat ipsa dignissimos obcaecati, tempore dolore, voluptatum rerum temporibus minus eligendi quidem eaque?
+                                    
+                                    {# <button type="button" 
+                                        class="btnDetails" 
+                                    >
+                                    ...
+                                    </button>	 #}
+                                    </p>									
+
+                                </div>
+                                                
+                        </div>
+                    {# {% endfor %} #}
+
+                       
+                </div>
+        </div>    
+   </section>
+
+
+   {# Section Proffessionals' Realisations.
+   Method created in Client Controller.
+   To decide in which view to show this method with corresponding template
+  #}
+
+{# <pre>
+    {{ dump(profProjects[0]) }}
+</pre> #}
+
+
+
+   <section id="prof-realisations">
+
+        <div class="container realisations">
+            <h2 class="section-title text-center">Nos Realistations</h2>   
+
+
+                {% for project in profProjects %}
+
+                    {% if (loop.index is odd) %}
+                            <div class="flex-row d-flex align-items-end  row-realisation">
+                                    <div class="col-6 realisation-img-card text-right">
+                                        <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}">
+                                    </div>
+                                    <div class="col-6 realisation-description-card  ">
+                                        <h3 class="pt-5 pb-2 text-left ">
+                                             {{project.title}}
+                                        </h3>
+                                        <p class="py-4 text-left  ">
+                                            {{project.description}}
+                                        </p>	
+                                    </div>
+                            </div>
+
+                        {% else %}
+                            <div class="flex-row-reverse d-flex align-items-end row-realisation">
+
+                                    <div class="col-6 realisation-img-card">
+                                        <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}">
+                                    </div>
+                                    <div class="col-6 realisation-description-card  ">
+                                        <h3 class="pt-5 pb-2  ">
+                                             {{project.title}}
+                                        </h3>
+                                        <p class="py-4  ">
+                                             {{project.description}}
+                                        </p>	
+                                    </div>
+                            </div>
+                        {% endif %}
+            
+                {% endfor %} 
+   </section>  
+
+{% endblock %}
