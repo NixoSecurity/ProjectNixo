@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ServiceFormType extends AbstractType
 {
@@ -20,18 +21,30 @@ class ServiceFormType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du service',
-                'required' => False
+                'required' => true
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'required' => False
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                       'message' => 'Veuillez saisir une descripyion'
+                    ])
+                ]
             ])
-            ->add('clients',EntityType::class,[
+            ->add('client',EntityType::class,[
                 'class' => Client::class,
                 'choice_label' =>'name',
                 'label' => 'Type de client associé',
+<<<<<<< HEAD
+                'required' => True, 
+                // 'multiple' =>true,
+                'expanded' => true,
+
+=======
                 'required' => False,
                 'mapped' => false,
+>>>>>>> dev
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer '
@@ -46,3 +59,6 @@ class ServiceFormType extends AbstractType
         ]);
     }
 }
+//->add('clients',ServiceClientEntityType::class,[
+    //     'class'=>Client::class
+    // ])
