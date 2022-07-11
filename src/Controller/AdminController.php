@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProjectFormType;
 use App\Form\CategoryFormType;
 use App\Form\ServiceFormType;
+use App\Repository\PartnerRepository;
 use App\Repository\ServiceRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
+    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
     {
         $projects = $paginatorInterface->paginate( 
             $projectRepository->findAll(),
@@ -33,14 +34,19 @@ class AdminController extends AbstractController
         );
         $services = $paginatorInterface->paginate(
             $serviceRepository->findAll(),
-            $request->query->getInt('page',1),6
+            $request->query->getInt('page',1),5
+        );
+        $partners = $paginatorInterface->paginate(
+            $partnerRepository->findAll(),
+            $request->query->getInt('page',1),5
         );
        
 
         return $this->render('admin/index.html.twig', [
             'projects' => $projects,
             'cats' => $cats, 
-            'services' => $services
+            'services' => $services,
+            'partners' => $partners
         ]);
       
     }

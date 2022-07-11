@@ -52,7 +52,7 @@
 								<td>{{ project.Description | u.truncate(20,'...') }}</td>
 								<td>{{ project.city }}</td>
 								<td>{{ project.createdAt | date('d-m-Y') }}</td>
-								
+
 								<td>
 									{% if vich_uploader_asset(project,'coverFile') %}
 										<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
@@ -60,14 +60,16 @@
 								</td>
 								<td>{{ project.client.name }}</td>
 								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editProject' , {id: project.id })}}"><i class="fa-solid fa-pen-to-square"></i></a>
+									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editProject' , {id: project.id })}}">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</a>
 									{# Formulaire securisé de suppresion #}
 									<form
 										action="{{ path('app_admin_deleteProject', { id: project.id } ) }}" method="post" class="d-inline">
 										{# csrf_token().. creation d'un jeton unique  #}
 										<input type="hidden" name="token" value="{{ csrf_token('delete-project-'~ project.id) }}">
 										<button class="btn btn-outline-danger">
-										<i class="fa-solid fa-trash-can"></i>
+											<i class="fa-solid fa-trash-can"></i>
 										</button>
 									</form>
 								</td>
@@ -76,7 +78,7 @@
 						{% endfor %}
 					</tbody>
 				</table>
-				{# {{ knp_pagination_render(projects) }} #}
+		
 
 
 			</div>
@@ -106,7 +108,9 @@
 							<tr>
 								<td>{{ cat.name }}</td>
 								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editCat' , {id: cat.id })}}"><i class="fa-solid fa-pen-to-square"></i></a>
+									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editCat' , {id: cat.id })}}">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</a>
 									<form
 										action="{{ path('app_admin_deleteCat', { id: cat.id } ) }}" method="post" class="d-inline">
 										{# csrf_token().. creation d'un jeton unique  #}
@@ -144,16 +148,18 @@
 						</tr>
 					</thead>
 					<tbody>
-					
+
 						{% for service in services | reverse %}
 							<tr>
-							
+
 								<td>{{ service.name }}</td>
 								<td>{{ service.description | u.truncate(20,'...') }}</td>
 								<td>{{ service.client.name }}</td>
-								
+
 								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editService' , {id: service.id })}}"><i class="fa-solid fa-pen-to-square"></i></a>
+									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editService' , {id: service.id })}}">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</a>
 									<form
 										action="{{ path('app_admin_deleteService', { id: service.id } ) }}" method="post" class="d-inline">
 										{# csrf_token().. creation d'un jeton unique  #}
@@ -176,7 +182,7 @@
 						<h2>Partenaires</h2>
 					</div>
 					<div class="col-6">
-						<a class="btn btn-danger" href="#">Nouveau Partenaires</a>
+						<a class="btn btn-danger" href="{{ path('app_admin_newPartner')}}">Nouveau Partenaires</a>
 					</div>
 				</div>
 
@@ -189,19 +195,34 @@
 						</tr>
 					</thead>
 					<tbody>
-						{# {% for part in partenaires %}
-													<tr>
-														<td>{{ part.name }}</td>
-													</tr>
-												{% endfor %} #}
+						{% for part in partners | reverse  %}
+							<tr>
+								<td>{{ part.title }}</td>
+								<td>
+									{% if vich_uploader_asset(part,'coverFile') %}
+										<img src="{{ vich_uploader_asset(part,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
+									{% endif %}
+								</td>
+							</tr>
+							<td>
+								<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editPartner' , {id: part.id })}}">
+									<i class="fa-solid fa-pen-to-square"></i>
+								</a>
+								<form
+									action="{{ path('app_admin_deletePartner', { id: part.id } ) }}" method="post" class="d-inline">
+									{# csrf_token().. creation d'un jeton unique  #}
+									<input type="hidden" name="token" value="{{ csrf_token('delete-partner-'~ part.id) }}">
+									<button class="btn  btn-outline-danger">
+										<i class="fa-solid fa-trash-can"></i>
+									</button>
+								</form>
+							</td>
+						{% endfor %}
 
 					</tbody>
 				</table>
 			</div>
 		</div>
-
-
-		{# {{ knp_pagination_render(cats) }} #}
 
 
 	</div>

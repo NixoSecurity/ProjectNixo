@@ -12,18 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartnerController extends AbstractController
 {
-    #[Route('/partner', name: 'app_partner')]
-    public function index(PartnerRepository $partnerRepository): Response
+    #[Route('/admin/partner', name: 'app_partner')]
+    public function index(): Response
     {
-        return $this->render('partner/partner.html.twig', [
-            'partners' => $partnerRepository->findAll()
+        return $this->render('admin/index.html.twig', [
+            
         ]);
     }
 
     // PARTNER ADMIN SECTION
 
     
-    #[Route('/partner/new', name: 'app_admin_newPartner')]
+    #[Route('/admin/partner/new', name: 'app_admin_newPartner')]
     public function addPartner(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner;
@@ -41,7 +41,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/partner/edit/{id}', name: 'app_admin_editPartner', requirements: ['id' => '\d+'])]
+    #[Route('/admin/partner/edit/{id}', name: 'app_admin_editPartner', requirements: ['id' => '\d+'])]
     public function updatePartner(Partner $partner, Request $request, PartnerRepository $partnerRepository): Response
     {
         $form = $this->createForm(PartnerFormType::class, $partner);
@@ -59,7 +59,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/partner/delete/{id}', name: 'app_admin_deletePartner', requirements: ['id' => '\d+'])]
+    #[Route('/admin/partner/delete/{id}', name: 'app_admin_deletePartner', requirements: ['id' => '\d+'])]
     public function deletePartner(Partner $partner, Request $request, PartnerRepository $partnerRepository): Response
     {
         $tokenCsrf = $request->request->get('token');
