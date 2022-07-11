@@ -21,15 +21,17 @@ class Service
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'services')]
+    private $client;
+
    
 
-    #[ORM\ManyToMany(targetEntity: Client::class, inversedBy: 'services')]
-    private $clients;
+   
 
     public function __construct()
     {
         
-        $this->clients = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -60,29 +62,23 @@ class Service
 
         return $this;
     }
-
-
-    /**
-     * @return Collection<int, Client>
-     */
-    public function getClients(): Collection
+    public function __toString():string
     {
-        return $this->clients;
+        return $this->name ?:'';
     }
 
-    public function addClient(Client $client): self
+    public function getClient(): ?Client
     {
-        if (!$this->clients->contains($client)) {
-            $this->clients[] = $client;
-        }
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
 
-    public function removeClient(Client $client): self
-    {
-        $this->clients->removeElement($client);
 
-        return $this;
-    }
+    
 }

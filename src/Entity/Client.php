@@ -20,16 +20,19 @@ class Client
 
    
 
-    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'clients')]
-    private $services;
+   
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Project::class)]
     private $projects;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Service::class)]
+    private $services;
+
     public function __construct()
     {
-        $this->services = new ArrayCollection();
+        
         $this->projects = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,34 +52,8 @@ class Client
         return $this;
     }
 
- 
 
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
-
-    public function addService(Service $service): self
-    {
-        if (!$this->services->contains($service)) {
-            $this->services[] = $service;
-            $service->addClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeService(Service $service): self
-    {
-        if ($this->services->removeElement($service)) {
-            $service->removeClient($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Project>
@@ -102,6 +79,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($project->getClient() === $this) {
                 $project->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+            $service->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getClient() === $this) {
+                $service->setClient(null);
             }
         }
 
