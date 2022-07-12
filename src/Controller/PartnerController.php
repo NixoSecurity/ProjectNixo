@@ -21,7 +21,7 @@ class PartnerController extends AbstractController
             $request->query->getInt('page',1),5
         );
        
-        return $this->render('partner/index.html.twig', [
+        return $this->render('admin/PartnerAll.html.twig', [
             'partners'=> $partners
         ]);
     }
