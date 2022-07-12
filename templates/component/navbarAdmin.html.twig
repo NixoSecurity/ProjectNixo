@@ -10,6 +10,8 @@
 <li>
 					<a class="nav-link px-4" href="{{ path('app_admin')}}">tableau de bord</a>
 				</li>
+
+				{# Categories #}
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Categories
@@ -24,6 +26,7 @@
 
 					</ul>
 				</li>
+				{# Projects #}
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Projets
@@ -38,6 +41,7 @@
 
 					</ul>
 				</li>
+				{# Services #}
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Services
@@ -53,6 +57,23 @@
 					</ul>
 				
 				</li>
+				{# Partners #}
+<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Partenaires
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_admin_newPartner')}}">Nouveau partenaire</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_adminPartner')}}">Tous les partenaires</a>
+						</li>
+
+					</ul>
+				
+				</li>
+
 
 				<li>
 					<a class="nav-link px-4" href="#">Contact</a>

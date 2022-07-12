@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Partner;
 use App\Form\PartnerFormType;
 use App\Repository\PartnerRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartnerController extends AbstractController
 {
-    #[Route('/admin/partner', name: 'app_partner')]
-    public function index(): Response
+    #[Route('/admin/partner', name: 'app_adminPartner')]
+    public function index(PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,Request $request): Response
     {
-        return $this->render('admin/index.html.twig', [
-            
+        $partners = $paginatorInterface->paginate(
+            $partnerRepository->findAll(),
+            $request->query->getInt('page',1),5
+        );
+       
+        return $this->render('partner/index.html.twig', [
+            'partners'=> $partners
         ]);
     }
 

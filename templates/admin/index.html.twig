@@ -5,7 +5,7 @@
 
 
 {% block body %}
-	{{ include('components/navbarAdmin.html.twig')}}
+{{ include('component/navbarAdmin.html.twig')}}
 
 	<div class="container">
 
@@ -126,7 +126,7 @@
 
 				</table>
 			</div>
-			{# section Service#}
+			{# section Services#}
 			<div class="col-12 col-lg-4">
 				<div class="row">
 					<div class="col-6">
@@ -175,7 +175,7 @@
 					</tbody>
 				</table>
 			</div>
-			{# section Partenaire#}
+			{# section Partners#}
 			<div class="col-12 col-lg-4">
 				<div class="row">
 					<div class="col-6">
@@ -203,8 +203,7 @@
 										<img src="{{ vich_uploader_asset(part,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
 									{% endif %}
 								</td>
-							</tr>
-							<td>
+								<td>
 								<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editPartner' , {id: part.id })}}">
 									<i class="fa-solid fa-pen-to-square"></i>
 								</a>
@@ -217,6 +216,8 @@
 									</button>
 								</form>
 							</td>
+							</tr>
+							
 						{% endfor %}
 
 					</tbody>
