@@ -30,12 +30,11 @@
      {% block body %}
       
         {{ include('component/_navigbar.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') %}
+    	{{ include('component/navbarAdmin.html.twig')}}
+        {% endif %}
         <div class="nav-space"></div>
 
-    
-            {# {{ render(controller(
-                'App\\Controller\\ProjectController::index'
-            )) }} #}
        
 
      
