@@ -27,16 +27,19 @@ class ContactController extends AbstractController
                 ->from($contactFormData['email'])
                 ->to('nchevassu@nixo-dvt.fr')
                 ->subject('Nouveau message de ' . $contactFormData['firstname'] . ' ' . $contactFormData['lastname'])
-                ->html( '<p style="color: gery">E-mail de l\'expéditeur: </p> '.  '<p style="color: blue">' . $contactFormData['email'].'</p>' .
-                        '<p style="color: gery">Nom de l\'expéditeur:</p> ' . '<p style="color: blue">' .$contactFormData['firstname'] . ' '. $contactFormData['lastname'].'</p>' .
-                        '<p style="color: gery">Date: </p>' . '<p style="color: blue">' . $date .'</p>' .
-                        '<p style="color: gery">Message: </p>' .
-                        '<p style="color: blue">' . $contactFormData['message'] .'</p>' , 'utf-8' 
+                ->html( '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> E-mail de l\'expéditeur: </span> ' . $contactFormData['email'].'</p>' .
+                        '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> Nom de l\'expéditeur: </span> ' .$contactFormData['firstname'] . ' '. $contactFormData['lastname'].'</p>' .
+                        '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> Date: </span> ' . $date .'</p>' .
+                        '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> Code Postal: </span> ' . $contactFormData['codePostal'] .'</p>' .
+                        '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> Sujet: </span> ' . $contactFormData['subject'] .'</p>' .
+                        '<p style = "color: black; font-family: sans-serif;"><span style="color: grey"> Message: </span> </p>' .                              
+                        '<p style = "color: black; font-family: sans-serif;">' . $contactFormData['message'] .'</p>' ,
+                         'utf-8' 
                         );
 
             $mailer->send($message);
 
-            $this->addFlash('success', 'Your message has been  sent');
+            $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_contact');
         }
 

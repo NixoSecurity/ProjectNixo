@@ -1,50 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-<section id="contact">
 
-    <div class="container">
-        <h2 class="section-title contact-title text-center">Contactez nous</h2>
-  
-        {%  for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4" role"alert">
-                {{ message }}
-            </div>
-        {% endfor %}
+    <section id="contact">
 
-        <div class="contact-form">
-            <div class="form-group">
-                {{ form_start(form) }}
-                    <div class="form-group">
-                        {{ form_row(form.firstname, {'attr': {'class': 'form-control contact-input'}}) }}
-                        {{ form_errors(form.firstname) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.lastname, {'attr': {'class': 'form-control contact-input'}}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.email, {'attr': {'class': 'form-control contact-input '}}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.codePostal, {'attr': {'class': 'form-control contact-input', 'placeholder': 'ex: 71000'}}) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.subject, {'attr': {'class': 'form-control contact-input'}}) }}
+        <div class="container">
+            <h2 class="section-title contact-title ">Contactez nous</h2>
+    
+            {%  for message in app.flashes('success') %}
+                <div class="alert alert-success contact-alert my-4" role"alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
 
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.message, {'attr': {'class': 'form-control contact-input '}}) }}
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Send" class="test-button">
-                    </div>
-                {{ form_end(form) }}
+            <div class="contact-form">
+                <div class="form-group">
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-12 col-md-6 form-group">
+                                {{ form_row(form.firstname, {'attr': {'class': 'form-control contact-input'}}) }}
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                {{ form_row(form.lastname, {'attr': {'class': 'form-control contact-input'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 form-group">
+                                {{ form_row(form.email, {'attr': {'class': 'form-control contact-input '}}) }}
+                            </div>
+                            <div class="col-12 col-md-6 form-group">
+                                {{ form_row(form.codePostal, {'attr': {'class': 'form-control contact-input', 'placeholder': 'ex: 71000'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.subject, {'attr': {'class': 'form-control contact-input'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.message, {'attr': {'class': 'form-control contact-input '}}) }}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Envoyer" class="test-button">
+                        </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    {# {{ include('component/_footer.html.twig') }} #}
 {% endblock %}
 
 
