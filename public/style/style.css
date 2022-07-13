@@ -24,6 +24,13 @@ body {
     background-color: var(--bg-white);
     
 }
+
+footer {
+  height: 200px;
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
 .admin-nav-logo {
   width: 50%;
 }
@@ -346,7 +353,7 @@ section .portfolio-2{
   font-size: 2rem;
   font-weight: 400;
   color: var(--text-color);
- font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif;
   padding-bottom: 10vh;
   padding-top: 10vh;
 }

@@ -12,6 +12,7 @@
             <link rel="stylesheet" href="{{ asset('style/style.css') }}" >
             <link rel="stylesheet" href="{{ asset('/style/navbar.css') }}">
             <link rel="stylesheet" href="{{ asset('/style/partner.css') }}">
+            <link rel="stylesheet" href="{{ asset('/style/contact.css') }}">
             
         {% endblock %}
 
@@ -29,15 +30,15 @@
     
      {% block body %}
       
-        {{ include('component/_navigbar.html.twig') }}
+   
         {% if is_granted('ROLE_ADMIN') %}
-    	{{ include('component/navbarAdmin.html.twig')}}
+    	    {{ include('component/navbarAdmin.html.twig')}}
+        {% else %}
+             {{ include('component/_navigbar.html.twig') }}
         {% endif %}
-        <div class="nav-space"></div>
+        
+        <div class="nav-space"></div>     
 
-       
-
-     
      {% endblock %}
  
     </body>
