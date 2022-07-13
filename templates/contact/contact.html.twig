@@ -3,37 +3,49 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
+<section id="contact">
 
-		{%  for message in app.flashes('success') %}
-			<div class="alert alert-success mt-4" role"alert">
-				{{ message }}
-			</div>
-		{% endfor %}
+    <div class="container">
+        <h2 class="section-title contact-title text-center">Contactez nous</h2>
+  
+        {%  for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4" role"alert">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-<div class="bg-white p-5 contact-form">
-    <div class="form-group">
-{{ form_start(form) }}
-    {{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}
+        <div class="contact-form">
+            <div class="form-group">
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_row(form.firstname, {'attr': {'class': 'form-control contact-input'}}) }}
+                        {{ form_errors(form.firstname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.lastname, {'attr': {'class': 'form-control contact-input'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.email, {'attr': {'class': 'form-control contact-input '}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.codePostal, {'attr': {'class': 'form-control contact-input', 'placeholder': 'ex: 71000'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.subject, {'attr': {'class': 'form-control contact-input'}}) }}
 
-{{ form_start(form) }}
-    {{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}
-
-
-</div>
-<div class="form-group">
-    {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
-
-</div>
-<div class="form-group">
-    {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
-
-</div>
-
-<div class="form-group">
-    <input type="submit" value="Send" class="btn btn-primary py-3 px-5">
-</div>
-{{ form_end(form) }}
-</div>
-
-</div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.message, {'attr': {'class': 'form-control contact-input '}}) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send" class="test-button">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
+
+
+
