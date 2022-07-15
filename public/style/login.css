@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+:root { 
+    --title-font: 'Oswald', sans-serif;
+    --text-font: 'Source Sans Pro', sans-serif; 
+    --bg-primary: #011638;
+    --bg-white: #FFFBFF;
+    --logo:url(../images/Logo.png);
+    --btn-color: #D3A656;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    background-color: var(--bg-primary);
+    color: var(--bg-white);
+    
+    font-family: var(--title-font);   
+}
+
+
+.navbar-logo {
+    background-image: var(--logo) ;
+    background-size: contain;
+    background-repeat: no-repeat; 
+    width: 50vh;
+    height: 30vh;
+    margin-inline-start: 0.5em;
+}
+
+.btn {
+    background-color:var(--btn-color) ;
+    border-radius: 12px;
+    color: var(--bg-white);
+}
+.btn :hover{
+    background-color:var(--bg-primary) ;
+    color: var(--bg-white);
+    
+}
