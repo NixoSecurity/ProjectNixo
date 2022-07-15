@@ -367,20 +367,36 @@ section .portfolio-2{
 
 /* INTRODUCTION */
 
+#introduction {
+  background-color: var(--bg-primary);
+}
 .intro-prof {
-  background-image: url(../images/prof-surveillance.jpg);
-  height: 70vh;
+  background-image: url(../images/SH156AX_ambiance.jpg);
+  height: 90vh;
   background-size: cover;
   background-repeat: no-repeat; 
   position: relative;
 }
 
 .intro-particulier {
-  background-image: url(../images/video-surveillance-maison.jpg);
-  height: 70vh;
+  background-image: url(../images/exterieur_v1.jpg);
+  height: 90vh;
   background-size: cover;
   background-repeat: no-repeat; 
   position: relative;
+}
+.intro-logo {
+  background-color: var(--bg-primary);
+  height: 90vh;
+}
+.intro-title {
+  color: var(--bg-white);
+  padding: 2rem;
+  font-size: 3rem;
+  font-family: 'Oswald', sans-serif;
+}
+.intro-title:hover {
+  color: var(--btn-color);
 }
 
 .btn-prof, .btn-particulier {
