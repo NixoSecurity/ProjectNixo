@@ -20,7 +20,7 @@ body {
 }
 
 
-.navbar-logo {
+.logo {
     background-image: var(--logo) ;
     background-size: contain;
     background-repeat: no-repeat; 

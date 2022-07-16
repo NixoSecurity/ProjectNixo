@@ -10,8 +10,9 @@
 			
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />{# Local CSS #}
             <link rel="stylesheet" href="{{ asset('style/style.css') }}" >
-            <link rel="stylesheet" href="{{ asset('/style/navbar.css') }}">
-            <link rel="stylesheet" href="{{ asset('/style/partner.css') }}">
+            <link rel="stylesheet" href="{{ asset('style/navbar.css') }}">
+            <link rel="stylesheet" href="{{ asset('style/partner.css') }}">
+            
             
         {% endblock %}
 
@@ -27,16 +28,20 @@
     <body>
   
     
-     {% block body %}
+    
+    <nav class="navbar-container">
       
         {{ include('component/_navigbar.html.twig') }}
-      
-        <div class="nav-space"></div>
+    </nav>
 
-       
-
-     
+        {% block body %}    
      {% endblock %}
+     
+        
+
+        <footer>
+        
+        </footer>
  
     </body>
 </html>

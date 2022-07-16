@@ -1,40 +1,104 @@
-<header id="navbar">
-    <nav class="navbar-container container">
 
-        <a class="home-link" href="/">
-            <div class="navbar-logo">
+
+<div class="nav-container">
+
+
+		<a class="home-link" href="/">
+			<div class="navbar-logo"></div>
+		</a>
+
+
+            <div id="navbar-menu">
+                <ul class="navbar-links">
+                    <li class="navbar-item">
+                        <a class="navbar-link " href="/client/professionnel">Professionnels</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="navbar-link " href="{{path('app_client_partic')}}">Particuliers</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="navbar-link " href="#">Services</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="navbar-link " href="#">Contact</a>
+                    </li>
+                </ul>
             </div>
-        </a>
+        
+		{% if is_granted('ROLE_ADMIN') %}
+			<div id="navbar-menu">
+				<ul class="navbar-item">
+					<li>
+						<a class="nav-link " href="{{ path('app_admin')}}">tableau de bord</a>
+					</li>
+	                {# Categories #}
+					<li class="nav-item dropdown ">
+						<a class="nav-link dropdown-toggle container" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Categories
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_newCat')}}">Nouvelle categorie</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_category')}}">Toutes categorie</a>
+							</li>
 
-        <div id="toggle-icon" >
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
+						</ul>
+					</li>
+					{# Projects #}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Projets
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_newProject')}}">Nouveau projet</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_adminProject')}}">Tous les projets</a>
+							</li>
 
-        <div id="navbar-menu">
-            <ul class="navbar-links">
-                <li class="navbar-item">
-                    <a class="navbar-link container" href="/client/professionnel">Professionnels</a>
-                </li>
-                            <li class="navbar-item">
-                    <a class="navbar-link container" href="{{path('app_client_partic')}}">Particuliers</a>
-                </li>
-                            <li class="navbar-item">
-                    <a class="navbar-link container" href="#">Services</a>
-                </li>
-                            <li class="navbar-item">
-                    <a class="navbar-link container" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+						</ul>
+					</li>
+					{# Services #}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Services
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_newService')}}">Nouveau service</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_adminService')}}">Tous les services</a>
+							</li>
 
-    </nav>
-</header>
+						</ul>
+
+					</li>
+					{# Partners #}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Partenaires
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_newPartner')}}">Nouveau partenaire</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_adminPartner')}}">Tous les partenaires</a>
+							</li>
+
+						</ul>
+
+					</li>
+				
+				</ul>
+			</div>
+
+		{% endif %}
 
 
-
-
-
-
+	
 
