@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales - Nixo{% endblock %}
+
+{% block body %}
+ {{parent()}}
+
+        <section id="mentions-legales">
+            <div class="container">
+
+                <h1 class="section-title">Mentions légales</h1>
+
+                <h6>Bienvenue sur le site www.nixo-dvt.fr !</h6>
+                {# Owner #}
+                <h2>Propriétaire</h2>
+                <p>
+                Ce site est la propriété de "Nixo"<br>
+                Société à responsabilité limitée<br>
+                Numéro de TVA de Nixo : FR63898903091<br>
+                Téléphone : 06 52 40 48 79<br>
+                Email: nchevassu@nixo-dvt.fr<br>
+                Siège social:<br>
+                4 rue du Nord<br>
+                71240 Sennecy le Grand
+                </p>
+                <p>Responsable de publication : Nicolas Chevassu</p>
+
+                {# Domaine #}
+                <h2>Hébergeur</h2>
+                <p>
+                Ce site est hébergé par OVH. <br>
+                SAS au capital de 10 069 020 € <br>
+                RCS Lille Métropole 424 761 419 00045 <br>
+                Code APE 2620Z <br>
+                N° TVA : FR 22 424 761 419 <br>
+                Siège social : 2 rue Kellermann – 59100 Roubaix – France
+                </p>
+                {# <p>Les serveurs d’hébergement OVH sur lesquels BFC VIDEO SECURITE traite et stocke les bases de données sont exclusivement situés en France.</p> #}
+
+                {# Links #}
+                <h2>Liens</h2>
+                <p>
+                Les sites reliés directement ou indirectement au site Nixo ne sont pas sous son contrôle. En conséquence, 
+                nous n'assumons aucune responsabilité quant aux informations publiées sur ces sites. Les liens avec des sites 
+                extérieurs ne sont fournis qu'à titre de commodité et n'impliquent aucune caution quant à leur contenu.
+                </p>        
+
+            </div>
+        </section>
+        
+    {{ include('component/_footer.html.twig') }}
+{% endblock %}

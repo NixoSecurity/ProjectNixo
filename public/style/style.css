@@ -21,13 +21,10 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: 0;
-    background-color: var(--bg-white);    
+    background-color: var(--bg-white);   
+    font-size: 16px; 
 }
-footer {
-  height: 200px;
-  width: 100%;
-  background-color: var(--bg-primary);
-}
+
 .admin-nav-logo {
   width: 50%;
 }
@@ -94,16 +91,16 @@ footer {
     font-weight: 600;     
 }
 
-/* GENERAL */
-#prof-service, #prof-realisations {
-  margin-top: 10vh;
+ /*---------------------------- GENERAL------------------------------------- */
+#prof-service, #prof-realisations, #mentions-legales, #contact {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 400;
-  /* color: var(--text-color); */
-  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  /* font-weight: 400; */
+  font-family: var(--title-font);
   padding-bottom: 10vh;
   padding-top: 10vh;
 }
@@ -115,7 +112,7 @@ footer {
   font-family: 'Oswald', sans-serif;
 }
 
-/* INTRODUCTION */
+ /*---------------------------- INTRODUCTION------------------------------------- */
 
 #introduction {
   background-color: var(--bg-primary);
@@ -154,7 +151,7 @@ footer {
   transform: translate(-50%, -50%);
 }
 
-/* PROFESSIONNEL */
+ /*---------------------------- PROFESSIONNEL------------------------------------- */
 
 /* Service card */
 .icon-container {
@@ -186,6 +183,53 @@ footer {
 .row-realisation:nth-child(odd) {
   text-align: right !important;
  }
+
+ /*---------------------------- FOOTER------------------------------------- */
+ footer {
+  height: 15vh;
+  width: 100%;
+  background-color: var(--bg-primary);
+  color: var(--bg-white);
+}
+footer .phoneNo {
+  color: var(--bg-white);
+  padding-left: 10px;
+  font-size: 1.5rem;
+}
+footer a {
+  text-decoration: none;
+  color: var(--text-color-reverse);
+}
+footer a:hover {
+  color: var(--btn-color);
+}
+
+@media screen and (min-width: 959px) { 
+  .legales {
+    text-align: center;
+  }
+ }
+
+ /*---------------------------- MENTIONS LEGALES------------------------------------- */
+#mentions-legales h2 {
+  font-family: var(--title-font);
+  font-size: 1.8rem;
+  color: var(--text-color);
+}
+#mentions-legales p {
+  font-family: var(--text-font);
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+#mentions-legales h1 {
+  color: var(--text-color);
+}
+#mentions-legales h6{
+  color: var(--text-color);
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+}
 
 
 
