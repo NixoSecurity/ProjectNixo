@@ -39,6 +39,21 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByPleinDeTruc(string $clientName){
+        // SELECT * FROM project
+        return $this->createQueryBuilder('a')
+            // WHERE title = :title
+            ->where('a.client = :clientName')
+            // OR description = :description
+            ->orWhere('a.description = :description')
+            ->setParameters([
+                'title' => $clientName,
+                
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */

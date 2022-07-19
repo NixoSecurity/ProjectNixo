@@ -7,6 +7,8 @@
     --bg-white: #FFFBFF;
     --logo:url(../images/Logo.png);
     --btn-color: #D3A656;
+    --btn-edit:#ffd669;
+    --btn-delete: #d9011c;
 }
 
 body {
@@ -38,4 +40,22 @@ body {
     background-color:var(--bg-primary) ;
     color: var(--bg-white);
     
+}
+.ddStyle{
+    width:900px
+}
+.btn-edit{
+    background-color: var(--btn-edit);
+    border-radius: 12px;
+    color: var(--bg-white);
+}
+
+
+.btn-delete{
+    background-color: var(--btn-delete);
+   
+}
+.table-color {
+
+    color: var(--bg-white)
 }
