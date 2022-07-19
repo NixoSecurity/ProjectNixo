@@ -1,62 +1,47 @@
 {% block body %}
 
-   {# Carousel VS4 #}
-    <section class="portfolio-2 text-center">
-            {# Original radio buttons #}
-              <input class="radio1 mt-5" type="radio" name="position" checked /> 
-              <input class="radio2 mt-5" type="radio" name="position" /> 
-              <input class="radio3 mt-5" type="radio" name="position" />
-              <input class="radio4 mt-5" type="radio" name="position" />
-              <input class="radio5 mt-5 " type="radio" name="position" />  
-          
+<section id="portfolio-intro">
+    <div class="container">
+        <h2 class="section-title portfolio text-center">Nos Réalisations</h2>
+    </div>
+   {# Carousel #}
+    <div class="portfolio-2 text-center">
 
-                {# Personalised radio buttons which do not work currently  #}
-                <div>
-                        <label class="container-radio">
-                            <input class="radio1 mt-5" type="radio" name="position" checked />  
-                            <span class=" checkmark checkmark1"></span> 
-                        </label> 
+            {# Radio buttons #}
+              <input class="radio mt-5 form-check-input" type="radio" name="position" /> 
+              <input class="radio mt-5 form-check-input" type="radio" name="position" /> 
+              <input class="radio mt-5 form-check-input" type="radio" name="position" checked />
+              <input class="radio mt-5 form-check-input" type="radio" name="position" />
+              <input class="radio mt-5 form-check-input " type="radio" name="position" />                         
 
+            {# Carousel Cards #}
+            <main id="carousel">
                 
-                        <label class="container-radio">
-                            <input class="radio2 mt-5" type="radio" name="position" />
-                            <span class=" checkmark checkmark2"></span> 
-                        </label> 
-
-
-                        <label class="container-radio">
-                        <input class="radio3 mt-5" type="radio" name="position" />
-                            <span class=" checkmark checkmark3"></span> 
-                        </label> 
-
-                
-                        <label class="container-radio">
-                            <input class="radio4 mt-5" type="radio" name="position" />
-                            <span class="checkmark checkmark4"></span> 
-                        </label> 
-
+                {# Created iteration for 5 projects ONLY. 
+                to do: Mark particular 5 project in the data base to be selected for this carousel #}
+                             
+                    {% for project in projects|slice(0, 5)  %}                    
                     
-                        <label class="container-radio">
-                            <input class="radio5 mt-5 " type="radio" name="position" />  
-                            <span class=" checkmark checkmark5"></span> 
-                        </label> 
+                        <div class="item"> 
+                        {# to do: bind project id, to open in another page #}
+                            <a href="/">
+                                <div class="content-container">                      
+                                    {% if vich_uploader_asset(project,'coverFile') %}
+                                            <img  src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('portfolio') }}"  alt="{{project.id}}">
+                                        {% else %}
+                                            <img class="backup-img " src="{{ asset('/images/projectCover.jpg') }}"  alt="{{project.id}}">
+                                        {% endif %}                        
+                                    <div class="bg-transparent">
+                                    </div>                            
+                                    <h5> {{ project.title }}</h5>                            
+                                    <h6> {{ project.city }}</h6>                        
+                                </div>                           
+                            </a>
+                        </div>
+    
+                    {% endfor %}   
 
-                </div>  
-
-        {# Carousel itself #}
-        <main id="carousel">
-            
-            {% for project in projects %}
-                <div class="item">    
-                    <h5> {{ project.title }}</h5>
-                   	{% if vich_uploader_asset(project,'coverFile') %}
-							<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('vignette') }}" id="object-position-1" alt="image d'un projet">
-						{% endif %}
-                    <p>{{ project.description|u.truncate(15,'Lire la suite...') }}</p>
-                </div>
-            {% endfor %}
-         
-        </main>
-    </section>
-
+            </main>
+    </div>
+</section>
 {% endblock %}

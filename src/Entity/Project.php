@@ -43,7 +43,7 @@ class Project
 
     #[Vich\UploadableField(mapping: 'projects', fileNameProperty: 'cover' )]
     #[Assert\Image(mimeTypesMessage: 'Ceci n\'est pas une image')]
-    #[Assert\File(maxSize: '1M',
+    #[Assert\File(maxSize: '3M',
      maxSizeMessage: 'Cette image ne doit pas dépasser les {{ limit }} {{ suffix }}',
 
      )]

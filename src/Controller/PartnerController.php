@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartnerController extends AbstractController
 {
-    #[Route('/admin/partner', name: 'app_adminPartner')]
+    #[Route('/partner', name: 'app_adminPartner')]
     public function index(PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,Request $request): Response
     {
         $partners = $paginatorInterface->paginate(
@@ -21,7 +21,8 @@ class PartnerController extends AbstractController
             $request->query->getInt('page',1),5
         );
        
-        return $this->render('admin/PartnerAll.html.twig', [
+        // return $this->render('admin/PartnerAll.html.twig', [
+            return $this->render('partner/partner.html.twig', [
             'partners'=> $partners
         ]);
     }

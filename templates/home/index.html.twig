@@ -5,10 +5,9 @@
 {% block body %}
   {{parent()}}
 
-   {{ include('component/_intro.html.twig') }}
-
-    {{ render(controller('App\\Controller\\ContactController::contact')) }}
-
-    {{ include('component/_footer.html.twig') }}
+  {{ include('component/_intro.html.twig') }}   
+  {{ render(controller('App\\Controller\\ProjectController::index')) }}
+  {{ render(controller('App\\Controller\\ContactController::contact')) }}
+  {{ include('component/_footer.html.twig') }}
 
 {% endblock %}
