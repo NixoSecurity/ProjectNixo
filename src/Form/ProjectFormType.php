@@ -29,7 +29,7 @@ class ProjectFormType extends AbstractType
                 'required' => False
             ])
             ->add('created_at', DateType::class, [
-                'label' => 'Date du magazine',
+                'label' => 'Date du projet',
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
                 'required' => False
