@@ -220,8 +220,8 @@
                 {% endfor %} 
    </section>  
 
-
  {{ render(controller('App\\Controller\\PartnerController::showAll')) }}
  {{ render(controller('App\\Controller\\ContactController::contact')) }}
+ {{ include('component/_footer.html.twig') }}
 
 {% endblock %}

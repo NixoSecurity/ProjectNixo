@@ -35,8 +35,11 @@ liip_imagine:
         logo:
             quality: 100
             filters:
-                thumbnail: { size: [300, 300], mode: 'inset'}
-                background: { size: [400, 400], position: center, color: '#F2F2F2'}
+                thumbnail: { size: [300, 300], mode: 'inset'}   
+        recologo:
+            quality: 100
+            filters:
+                thumbnail: { size: [600, 600], mode: 'inset'}               
         portfolio:
             quality: 100   
             filters:

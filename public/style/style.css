@@ -92,7 +92,7 @@ body {
 }
 
  /*---------------------------- GENERAL------------------------------------- */
-#prof-service, #prof-realisations, #mentions-legales, #contact {
+#prof-service, #prof-realisations, #mentions-legales, #contact, #partners {
   padding-top: 10vh;
   padding-bottom: 10vh;
 }

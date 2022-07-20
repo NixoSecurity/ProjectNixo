@@ -36,7 +36,6 @@ class PartnerController extends AbstractController
         ]);
     }
 
-
     // PARTNER ADMIN SECTION
     
     #[Route('/admin/partner/new', name: 'app_admin_newPartner')]
