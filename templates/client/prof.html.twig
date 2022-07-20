@@ -12,7 +12,7 @@
    <section id="prof-service">
   
         <div class="container">
-            <h2 class="section-title portfolio text-center">Services</h2>
+            <h2 class="section-title portfolioProf text-center">Services</h2>
         </div>
 
         <div class="container">
@@ -220,6 +220,8 @@
                 {% endfor %} 
    </section>  
 
+ {{ render(controller('App\\Controller\\PartnerController::showAll')) }}
  {{ render(controller('App\\Controller\\ContactController::contact')) }}
+ {{ include('component/_footer.html.twig') }}
 
 {% endblock %}

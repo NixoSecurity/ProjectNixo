@@ -13,22 +13,30 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PartnerController extends AbstractController
 {
-    #[Route('/partner', name: 'app_adminPartner')]
-    public function index(PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,Request $request): Response
-    {
-        $partners = $paginatorInterface->paginate(
-            $partnerRepository->findAll(),
-            $request->query->getInt('page',1),5
-        );
+    // #[Route('/partner', name: 'app_partner')]
+    // public function index(PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,Request $request): Response
+    // {
+    //     $partners = $paginatorInterface->paginate(
+    //         $partnerRepository->findAll(),
+    //         $request->query->getInt('page',1),5
+    //     );
        
-        // return $this->render('admin/PartnerAll.html.twig', [
-            return $this->render('partner/partner.html.twig', [
+    //     // return $this->render('admin/PartnerAll.html.twig', [
+    //         return $this->render('partner/partner.html.twig', [
+    //         'partners'=> $partners
+    //     ]);
+    // }
+
+    // #[Route('/partner', name: 'app_partner')]
+    public function showAll(PartnerRepository $partnerRepository): Response
+    {
+        $partners = $partnerRepository->findAll();
+        return $this->render('partner/partner.html.twig', [
             'partners'=> $partners
         ]);
     }
 
     // PARTNER ADMIN SECTION
-
     
     #[Route('/admin/partner/new', name: 'app_admin_newPartner')]
     public function addPartner(Request $request, PartnerRepository $partnerRepository): Response
