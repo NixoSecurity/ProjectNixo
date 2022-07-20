@@ -17,7 +17,6 @@ class ClientController extends AbstractController
         $client = $clientRepository->findBy(['name' => 'professionnel']);
         $profProjects = $projectRepository->findBy(['client' => $client]);
 
-
         return $this->render('client/prof.html.twig', [
             'profProjects' => $profProjects,
          ]);

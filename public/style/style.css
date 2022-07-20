@@ -153,6 +153,10 @@ body {
 
  /*---------------------------- PROFESSIONNEL------------------------------------- */
 
+ /* Service section */
+ .section-title.portfolioProf {
+  color: var(--text-color); 
+}
 /* Service card */
 .icon-container {
   width: 300px;
