@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProjectFormType;
 use App\Form\CategoryFormType;
 use App\Form\ServiceFormType;
+use App\Repository\ClientRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\ServiceRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -187,16 +188,29 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin');
     }
 
-    #[Route('/admin/project', name: 'app_adminProject')]
-    public function ProjectAll(ProjectRepository $projectRepository,PaginatorInterface $paginatorInterface,Request $request): Response
-    {
+    #[Route('/admin/project/', name: 'app_adminProject', requirements: ['filter' => '\d+'])]
+    public function ProjectAll(ProjectRepository $projectRepository,ClientRepository $clientRepository,string $filter = null,PaginatorInterface $paginatorInterface , Request $request): Response
+    { 
+        $filter = $request->query->get('filter');
+        if($filter){
+       
+           
+            $client = $clientRepository->findby(['name' =>$filter]);
+            $projectAll = $projectRepository->findby(['client'=>$client]);
+            
+
+        }else {
+             $projectAll = $projectRepository->findAll();
+        }
+
         $projects = $paginatorInterface->paginate( 
-            $projectRepository->findAll(),
+            $projectAll,
             $request->query->getInt('page',1),5
         );
       
         return $this->render('admin/ProjectAll.html.twig', [
             'projects' => $projects,
+            'clients'=>$clientRepository->findAll()
             
         ]);
       

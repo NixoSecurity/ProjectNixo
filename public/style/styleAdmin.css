@@ -59,3 +59,10 @@ body {
 
     color: var(--bg-white)
 }
+a{
+    text-decoration: none;
+    color: var(--bg-white)
+}
+a:hover{
+    color: var(--bg-white)
+}
