@@ -154,17 +154,12 @@
                                     >
                                     ...
                                     </button>	 #}
-                                    </p>									
-
-                                </div>
-                                                
+                                    </p>							
+                                </div>                                                
                         </div>
-
-                       
-                </div>
+                    </div>
         </div>    
    </section>
-
 
    {# Section Proffessionals' Realisations.
    Method created in Client Controller.
@@ -175,8 +170,6 @@
     {{ dump(profProjects[0]) }}
 </pre> #}
 
-
-
    <section id="prof-realisations">
 
         <div class="container realisations">
@@ -186,9 +179,16 @@
                 {% for project in profProjects %}
 
                     {% if (loop.index is odd) %}
-                            <div class="flex-row d-flex align-items-end  row-realisation">
+                            <div class="flex-row d-flex align-items-end  row-realisation" id="{{project.id}}">
                                     <div class="col-6 realisation-img-card text-right">
-                                        <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}">
+                                        {% if vich_uploader_asset(project,'coverFile') %}
+                                            <img  class="realisation-project-img" src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('portfolio') }}"  alt="{{project.title}}">
+                                        {% else %}
+                                            <img class="backup-img " src="{{ asset('/images/projectCover.jpg') }}"  alt="{{project.title}}">
+                                        {% endif %}                        
+
+
+                                        {# <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}"> #}
                                     </div>
                                     <div class="col-6 realisation-description-card  ">
                                         <h3 class="pt-5 pb-2 text-left ">
@@ -197,14 +197,22 @@
                                         <p class="py-4 text-left  ">
                                             {{project.description}}
                                         </p>	
+                                        <p class="test">{{project.id}}</p>
                                     </div>
                             </div>
 
                         {% else %}
-                            <div class="flex-row-reverse d-flex align-items-end row-realisation">
+                            <div class="flex-row-reverse d-flex align-items-end row-realisation" id="{{project.id}}">
 
                                     <div class="col-6 realisation-img-card">
-                                        <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}">
+
+                                        {% if vich_uploader_asset(project,'coverFile') %}
+                                            <img  class="realisation-project-img" src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('portfolio') }}"  alt="{{project.title}}">
+                                        {% else %}
+                                            <img class="backup-img " src="{{ asset('/images/projectCover.jpg') }}"  alt="{{project.title}}">
+                                        {% endif %}      
+
+                                        {# <img class="realisation-project-img" src="{{ asset('images/'~ project.cover) }}"  alt=" {{project.title}}"> #}
                                     </div>
                                     <div class="col-6 realisation-description-card  ">
                                         <h3 class="pt-5 pb-2  ">
@@ -213,6 +221,7 @@
                                         <p class="py-4  ">
                                              {{project.description}}
                                         </p>	
+                                         <p class="test">{{project.id}}</p>
                                     </div>
                             </div>
                         {% endif %}
