@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Client;
 use App\Entity\Project;
 use App\Entity\Service;
 use App\Repository\CategoryRepository;
@@ -23,62 +24,62 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(ProjectRepository $projectRepository,CategoryRepository $categoryRepository,PartnerRepository $partnerRepository,PaginatorInterface $paginatorInterface,ServiceRepository $serviceRepository,Request $request): Response
+    public function index(ProjectRepository $projectRepository, CategoryRepository $categoryRepository, PartnerRepository $partnerRepository, PaginatorInterface $paginatorInterface, ServiceRepository $serviceRepository, Request $request): Response
     {
-        $projects = $paginatorInterface->paginate( 
+        $projects = $paginatorInterface->paginate(
             $projectRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page', 1),
+            5
         );
         $cats = $paginatorInterface->paginate(
             $categoryRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page', 1),
+            5
         );
         $services = $paginatorInterface->paginate(
             $serviceRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page', 1),
+            5
         );
         $partners = $paginatorInterface->paginate(
             $partnerRepository->findAll(),
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page', 1),
+            5
         );
-       
+
 
         return $this->render('admin/index.html.twig', [
             'projects' => $projects,
-            'cats' => $cats, 
+            'cats' => $cats,
             'services' => $services,
             'partners' => $partners
         ]);
-      
     }
 
-/**
- * CRUD Category
- */
+    /**
+     * CRUD Category
+     */
     #[Route('/admin/category/new', name: 'app_admin_newCat')]
-    public function addCat(Request $request,CategoryRepository $categoryRepository): Response
+    public function addCat(Request $request, CategoryRepository $categoryRepository): Response
     {
         $cat = new Category;
         $form = $this->createForm(CategoryFormType::class, $cat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $categoryRepository->add($cat, true);
 
             $this->addFlash('success', 'Votre categorie à bien été enregistré !');
 
-          
-           
+
+
             return $this->redirectToRoute('app_admin');
-            
         }
 
         return $this->render('category/newCategory.html.twig', [
             'form' => $form->createView()
         ]);
-
-        
     }
 
     #[Route('/admin/cat/edit/{id}', name: 'app_admin_editCat', requirements: ['id' => '\d+'])]
@@ -87,14 +88,14 @@ class AdminController extends AbstractController
 
         $form = $this->createForm(CategoryFormType::class, $category);
         $form->handleRequest($request);
-       
-       
+
+
         if ($form->isSubmitted() && $form->isValid()) {
-          
+
             $categoryRepository->add($category, true);
 
             $this->addFlash('success', 'Le category :' . $category->getname() . 'mis a jour !');
-            
+
             return $this->redirectToRoute('app_admin');
         }
 
@@ -127,22 +128,21 @@ class AdminController extends AbstractController
      * CRUD Project
      */
     #[Route('/admin/project/new', name: 'app_admin_newProject')]
-    public function addProject(Request $request,ProjectRepository $projectRepository): Response
+    public function addProject(Request $request, ProjectRepository $projectRepository): Response
     {
         $project = new Project;
         $form = $this->createForm(ProjectFormType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $projectRepository->add($project, true);
 
             $this->addFlash('success', 'Votre projet à bien été enregistré !');
 
-          
-           
+
+
             return $this->redirectToRoute('app_admin');
-            
         }
 
         return $this->render('project/newProject.html.twig', [
@@ -155,14 +155,14 @@ class AdminController extends AbstractController
 
         $form = $this->createForm(ProjectFormType::class, $project);
         $form->handleRequest($request);
-       
-       
+
+
         if ($form->isSubmitted() && $form->isValid()) {
-          
+
             $projectRepository->add($project, true);
 
             $this->addFlash('success', 'Le project :' . $project->gettitle() . ' mis a jour !');
-            
+
             return $this->redirectToRoute('app_admin');
         }
 
@@ -178,64 +178,65 @@ class AdminController extends AbstractController
 
         $tokenCsrf = $request->request->get('token');
 
-        if ($this->isCsrfTokenValid('delete-project-'. $project->getId(), $tokenCsrf)) {
-        
-           $projectRepository->remove($project,true);
+        if ($this->isCsrfTokenValid('delete-project-' . $project->getId(), $tokenCsrf)) {
+
+            $projectRepository->remove($project, true);
             $this->addFlash('success', 'Le projet à bien été supprimée');
-            
         }
 
         return $this->redirectToRoute('app_admin');
     }
 
     #[Route('/admin/project/', name: 'app_adminProject', requirements: ['filter' => '\d+'])]
-    public function ProjectAll(ProjectRepository $projectRepository,ClientRepository $clientRepository,string $filter = null,PaginatorInterface $paginatorInterface , Request $request): Response
-    { 
-        $filter = $request->query->get('filter');
-        if($filter){
-       
-           
-            $client = $clientRepository->findby(['name' =>$filter]);
-            $projectAll = $projectRepository->findby(['client'=>$client]);
-            
+    public function ProjectAll(ProjectRepository $projectRepository, ClientRepository $clientRepository, string $filter = null, PaginatorInterface $paginatorInterface, Request $request): Response
+    {
 
-        }else {
-             $projectAll = $projectRepository->findAll();
+        $filter = $request->query->get('filter');
+
+
+        if ($filter === "professionnel" || $filter === "particulier") {
+            
+            $clientName = $clientRepository->findby(['name' => $filter]);
+            $projectAll = $projectRepository->findby(['client' => $clientName]);
+        }
+         else {
+            $projectAll = $projectRepository->findAll();
         }
 
-        $projects = $paginatorInterface->paginate( 
+        $projects = $paginatorInterface->paginate(
             $projectAll,
-            $request->query->getInt('page',1),5
+            $request->query->getInt('page', 1),
+            5
         );
-      
+
         return $this->render('admin/ProjectAll.html.twig', [
             'projects' => $projects,
-            'clients'=>$clientRepository->findAll()
+            'clients' => $clientRepository->findAll()
             
+
         ]);
-      
     }
 
     /**
- * CRUD Service
- */
+     * CRUD Service
+     */
 
-#[Route('/admin/service', name: 'app_adminService')]
-public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterface $paginatorInterface,Request $request): Response
-{
-    $services = $paginatorInterface->paginate( 
-        $serviceRepository->findAll(),
-        $request->query->getInt('page',1),5
-    );
-  
-    return $this->render('admin/serviceAll.html.twig', [
-        'services' => $services,
-        
-    ]);
-  
-}
-#[Route('/admin/service/new', name: 'app_admin_newService')]
-    public function addService(Request $request,ServiceRepository $serviceRepository): Response
+    #[Route('/admin/service', name: 'app_adminService')]
+    public function ServiceAll(serviceRepository $serviceRepository, PaginatorInterface $paginatorInterface, Request $request): Response
+    {
+        $services = $paginatorInterface->paginate(
+            $serviceRepository->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('admin/serviceAll.html.twig', [
+            'services' => $services,
+
+        ]);
+    }
+    #[Route('/admin/service/new', name: 'app_admin_newService')]
+    public function addService(Request $request, ServiceRepository $serviceRepository): Response
     {
         $service = new Service;
         $form = $this->createForm(ServiceFormType::class, $service);
@@ -245,12 +246,11 @@ public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterfa
             // dd($service);
             $serviceRepository->add($service, true);
 
-            $this->addFlash('success', 'Votre service à bien été enregistré pour le client: '.$service->getClient()->getName());
+            $this->addFlash('success', 'Votre service à bien été enregistré pour le client: ' . $service->getClient()->getName());
 
-          
-           
+
+
             return $this->redirectToRoute('app_admin');
-            
         }
 
         return $this->render('service/newservice.html.twig', [
@@ -264,14 +264,14 @@ public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterfa
 
         $form = $this->createForm(ServiceFormType::class, $service);
         $form->handleRequest($request);
-       
-       
+
+
         if ($form->isSubmitted() && $form->isValid()) {
-          
+
             $serviceRepository->add($service, true);
 
             $this->addFlash('success', 'Le Service :' . $service->getName() . 'mis a jour !');
-            
+
             return $this->redirectToRoute('app_admin');
         }
 
@@ -286,10 +286,10 @@ public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterfa
     {
 
         $tokenCsrf = $request->request->get('token');
-        $success= false;
-        if ($this->isCsrfTokenValid('delete-service-'. $service->getId(), $tokenCsrf)) {
-        
-           $serviceRepository->remove($service,true);
+        $success = false;
+        if ($this->isCsrfTokenValid('delete-service-' . $service->getId(), $tokenCsrf)) {
+
+            $serviceRepository->remove($service, true);
             $this->addFlash('success', 'Le service à bien été supprimée');
             $success = true;
         }
@@ -298,6 +298,4 @@ public function ServiceAll(serviceRepository $serviceRepository,PaginatorInterfa
             'success' => $success
         ]);
     }
-
-
 }

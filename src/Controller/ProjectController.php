@@ -14,23 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProjectController extends AbstractController
 {
-    #[Route('a/admin/project/{filter}', name: 'app_project')]
-    public function index(ProjectRepository $projectRepository,ClientRepository $clientRepository,string $filter = null,PaginatorInterface $paginatorInterface , Request $request): Response
+    #[Route('/project', name: 'app_project')]
+    public function index(ProjectRepository $projectRepository,PaginatorInterface $paginatorInterface , Request $request): Response
     {
-    //    dd($filter);
-        if($filter){
-        
-           
-            $client = $clientRepository->findby(['name' =>$filter]);
-            $projectAll = $projectRepository->findby(['client'=>$client]);
-            dd($projectAll);
-
-        }else {
-             $projectAll = $projectRepository->findAll();
-        }
+   
 
        $projects = $paginatorInterface->paginate(
-            $projectAll,
+            $projectRepository->findAll(),
             $request->query->getInt('page',1),5
             
         );
@@ -38,7 +28,7 @@ class ProjectController extends AbstractController
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
-            'clients'=>$clientRepository->findAll()
+            
         ]);
     }
     
