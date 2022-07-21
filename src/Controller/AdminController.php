@@ -38,7 +38,7 @@ class AdminController extends AbstractController
         );
         $partners = $paginatorInterface->paginate(
             $partnerRepository->findAll(),
-            $request->query->getInt('page',1),10
+            $request->query->getInt('page',1),5
         );
        
 
