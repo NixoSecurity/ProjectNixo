@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Proffessionnel{% endblock %}
+{% block title %}Professionnel{% endblock %}
 
 {% block body %}
     {{parent()}}
-
-
   
    {# Section Proffessionals' Services.
    Method to be created in Service Controller, and view with relevant method rendered from Service view.
@@ -237,6 +235,5 @@
  {# Contact form section #}
 
 {{ include('component/_contactForm.html.twig') }}
- {{ include('component/_footer.html.twig') }}
 
 {% endblock %}
