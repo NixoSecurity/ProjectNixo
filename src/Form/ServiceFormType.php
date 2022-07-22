@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ServiceFormType extends AbstractType
 {
@@ -39,8 +40,17 @@ class ServiceFormType extends AbstractType
                 'required' => True, 
                 // 'multiple' =>true,
                 'expanded' => true,
+ 
+            ]) 
+              ->add(
+                'coverFile', VichImageType::class, [
+                    'label' => 'Image',
+                    'imagine_pattern' => 'vignette', // Applique une configuration LiipImagine sur l'image
+                    'download_label' => false, // Enleve le lien de telechargement
+                    'delete_label' => 'Cocher pour supprimer l\'image',
+                    
+                ])
 
-            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer '
             ])

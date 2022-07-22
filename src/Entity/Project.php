@@ -50,6 +50,7 @@ class Project
     private $coverFile;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
     private $client;
 
 

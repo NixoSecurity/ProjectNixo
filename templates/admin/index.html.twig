@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Tableu de bord administration
 {% endblock %}
 
 
 {% block body %}
-{# {{ include('component/navbarAdmin.html.twig')}} #}
+	
+
 
 	<div class="container">
 
@@ -14,216 +15,218 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-
-		<div class="row mt-5">
-			{# section projects#}
-			<div class="col-12 col-lg-12">
-
-
-				<div class="row">
-					<div class="col-2">
-						<h2>Projets</h2>
-					</div>
-					<div class="col-10">
-						<a class="btn btn-danger" type="button " href="{{ path('app_admin_newProject')}}">Nouveau projet</a>
-					</div>
-				</div>
-
-
-				<table class="table">
-					<thead class="fs-5">
-						<tr>
-							<td>Titre</td>
-							<td>Description</td>
-							<td>Ville</td>
-							<td>Créer le</td>
-							<td>Image</td>
-							<td>Type de client</td>
-							<td>Action</td>
-
-						</tr>
-					</thead>
-					<tbody>
-						{% for project in projects | reverse %}
-							<tr>
-
-								<td>{{ project.title }}</td>
-								<td>{{ project.Description | u.truncate(20,'...') }}</td>
-								<td>{{ project.city }}</td>
-								<td>{{ project.createdAt | date('d-m-Y') }}</td>
-
-								<td>
-									{% if vich_uploader_asset(project,'coverFile') %}
-										<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
-									{% endif %}
-								</td>
-								<td>{{ project.client.name }}</td>
-								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editProject' , {id: project.id })}}">
-										<i class="fa-solid fa-pen-to-square"></i>
-									</a>
-									{# Formulaire securisé de suppresion #}
-									<form
-										action="{{ path('app_admin_deleteProject', { id: project.id } ) }}" method="post" class="d-inline">
-										{# csrf_token().. creation d'un jeton unique  #}
-										<input type="hidden" name="token" value="{{ csrf_token('delete-project-'~ project.id) }}">
-										<button class="btn btn-outline-danger">
-											<i class="fa-solid fa-trash-can"></i>
-										</button>
-									</form>
-								</td>
-
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
 		
+		<div class="row mt-5">
+		{# section projects#}
+			<div class="col-12 col-lg-3">
+				<div class="dropdown">
+					<div class="fs-2 dropdown-toggle" type="button" id="ddProject" data-bs-toggle="dropdown" aria-expanded="false">
+						Projets
+					</div>
 
+					<ul class="dropdown-menu ddStyle" aria-labelledby="ddProject">
+						<li>
+							<table class="table dropdown-item">
+								<thead class="fs-5">
+									<tr>
+										<td>Titre</td>
+										<td>Description</td>
+										<td>Ville</td>
+										<td>Créer le</td>
+										<td>Image</td>
+										<td>Type de client</td>
+										<td>Action</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% for project in projects | reverse %}
+										<tr>
+											<td>{{ project.title }}</td>
+											<td>{{ project.Description | u.truncate(20,'...') }}</td>
+											<td>{{ project.city }}</td>
+											<td>{{ project.createdAt | date('d-m-Y') }}</td>
+											<td>
+												{% if vich_uploader_asset(project,'coverFile') %}
+													<img src="{{ vich_uploader_asset(project,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
+												{% endif %}
+											</td>
+											<td>{{ project.client.name }}</td>
+											<td>
+												<a type="button" class="btn btn-edit" title="Editer" href="{{ path('app_admin_editProject' , {id: project.id })}}">
+													<i class="fa-solid fa-pen-to-square"></i>
+												</a>
+												{# Formulaire securisé de suppresion #}
+												<form
+													action="{{ path('app_admin_deleteProject', { id: project.id } ) }}" method="post" class="d-inline">
+													{# csrf_token().. creation d'un jeton unique  #}
+													<input type="hidden" name="token" value="{{ csrf_token('delete-project-'~ project.id) }}">
+													<button class="btn btn-delete">
+														<i class="fa-solid fa-trash-can"></i>
+													</button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</li>
+					</ul>
+				</div>
 
+				<a class="btn" type="button" href="{{ path('app_admin_newProject')}}">Nouveau projet</a>
 			</div>
-		</div>
-		<div class="row mt-4">
+
+
 			{# section categories#}
-			<div class="col-12 col-lg-4">
-				<div class="row">
-					<div class="col-6">
-						<h2>Categories</h2>
+			<div class="col-12 col-lg-3">
+				<div class="dropdown">
+					<div class="fs-2 dropdown-toggle" type="button" id="ddCat" data-bs-toggle="dropdown" aria-expanded="false">
+						Categories
+
 					</div>
-					<div class="col-6">
-						<a class="btn btn-danger" href="{{ path('app_admin_newCat')}}">Nouvelle categorie</a>
-					</div>
+
+					<ul class="dropdown-menu" aria-labelledby="ddCat" >
+						<li>
+							<table class="table">
+								<thead>
+
+									<tr>
+										<td>Nom Categorie</td>
+										<td>Action</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% for cat in cats %}
+										<tr>
+											<td>{{ cat.name }}</td>
+											<td>
+												<a type="button" class="btn btn-edit" title="Editer" href="{{ path('app_admin_editCat' , {id: cat.id })}}">
+													<i class="fa-solid fa-pen-to-square"></i>
+												</a>
+												<form
+													action="{{ path('app_admin_deleteCat', { id: cat.id } ) }}" method="post" class="d-inline">
+													{# csrf_token().. creation d'un jeton unique  #}
+													<input type="hidden" name="token" value="{{ csrf_token('delete-project-'~ cat.id) }}">
+													<button class="btn btn-delete">
+														<i class="fa-solid fa-trash-can"></i>
+													</button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+
+							</table>
+						</li>
+					</ul>
 				</div>
-
-				<table class="table">
-					<thead>
-
-						<tr>
-							<td>Nom Categorie</td>
-							<td>Action</td>
-						</tr>
-					</thead>
-					<tbody>
-						{% for cat in cats %}
-							<tr>
-								<td>{{ cat.name }}</td>
-								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editCat' , {id: cat.id })}}">
-										<i class="fa-solid fa-pen-to-square"></i>
-									</a>
-									<form
-										action="{{ path('app_admin_deleteCat', { id: cat.id } ) }}" method="post" class="d-inline">
-										{# csrf_token().. creation d'un jeton unique  #}
-										<input type="hidden" name="token" value="{{ csrf_token('delete-project-'~ cat.id) }}">
-										<button class="btn  btn-outline-danger">
-											<i class="fa-solid fa-trash-can"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-
-				</table>
+				<a class="btn " type="button" href="{{ path('app_admin_newCat')}}">Nouvelle categorie</a>
 			</div>
-			{# section Services#}
-			<div class="col-12 col-lg-4">
-				<div class="row">
-					<div class="col-6">
-						<h2>Services</h2>
+			{# section partnenaires#}
+			<div class="col-12 col-lg-3">
+				<div class="dropdown">
+					<div class="fs-2 dropdown-toggle" type="button" id="ddPartner" data-bs-toggle="dropdown" aria-expanded="false">
+						Partenaires
 					</div>
-					<div class="col-6">
-						<a class="btn btn-danger" href="{{ path('app_admin_newService')}}">Nouveau service</a>
-					</div>
+
+					<ul class="dropdown-menu ddStyle" aria-labelledby="ddPartner">
+						<li>
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Nom du partenaire</td>
+										<td>Logo</td>
+
+									</tr>
+								</thead>
+								<tbody>
+									{% for part in partners | reverse  %}
+										<tr>
+											<td>{{ part.title }}</td>
+											<td>
+												{% if vich_uploader_asset(part,'coverFile') %}
+													<img src="{{ vich_uploader_asset(part,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
+												{% endif %}
+											</td>
+											<td>
+												<a type="button" class="btn btn-edit" title="Editer" href="{{ path('app_admin_editPartner' , {id: part.id })}}">
+													<i class="fa-solid fa-pen-to-square"></i>
+												</a>
+												<form
+													action="{{ path('app_admin_deletePartner', { id: part.id } ) }}" method="post" class="d-inline">
+													{# csrf_token().. creation d'un jeton unique  #}
+													<input type="hidden" name="token" value="{{ csrf_token('delete-partner-'~ part.id) }}">
+													<button class="btn btn-delete">
+														<i class="fa-solid fa-trash-can"></i>
+													</button>
+												</form>
+											</td>
+										</tr>
+
+									{% endfor %}
+
+								</tbody>
+							</table>
+						</li>
+					</ul>
 				</div>
-
-				<table class="table">
-					<thead>
-						<tr>
-							<td>Nom du service</td>
-							<td>Description</td>
-							<td>Type de client</td>
-							<td>Actions</td>
-
-						</tr>
-					</thead>
-					<tbody>
-
-						{% for service in services | reverse %}
-							<tr>
-
-								<td>{{ service.name }}</td>
-								<td>{{ service.description | u.truncate(20,'...') }}</td>
-								<td>{{ service.client.name }}</td>
-
-								<td>
-									<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editService' , {id: service.id })}}">
-										<i class="fa-solid fa-pen-to-square"></i>
-									</a>
-									<form
-										action="{{ path('app_admin_deleteService', { id: service.id } ) }}" method="post" class="d-inline">
-										{# csrf_token().. creation d'un jeton unique  #}
-										<input type="hidden" name="token" value="{{ csrf_token('delete-service-'~ service.id) }}">
-										<button class="btn  btn-outline-danger">
-											<i class="fa-solid fa-trash-can"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
-						{% endfor %}
-
-					</tbody>
-				</table>
+				<a class="btn " href="{{ path('app_admin_newPartner')}}">Nouveau Partenaires</a>
 			</div>
-			{# section Partners#}
-			<div class="col-12 col-lg-4">
-				<div class="row">
-					<div class="col-6">
-						<h2>Partenaires</h2>
+
+				{# section Services#}
+			<div class="col-12 col-lg-3">
+				<div class="dropdown">
+					<div class="fs-2 dropdown-toggle" type="button" id="ddServices" data-bs-toggle="dropdown" aria-expanded="false">
+
+						Services
 					</div>
-					<div class="col-6">
-						<a class="btn btn-danger" href="{{ path('app_admin_newPartner')}}">Nouveau Partenaires</a>
-					</div>
+
+					<ul class="dropdown-menu ddStyle" aria-labelledby="ddServices">
+						<li>
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Nom du service</td>
+										<td>Description</td>
+										<td>Type de client</td>
+										<td>Actions</td>
+
+									</tr>
+								</thead>
+								<tbody>
+
+									{% for service in services | reverse %}
+										<tr>
+
+											<td>{{ service.name }}</td>
+											<td>{{ service.description | u.truncate(20,'...') }}</td>
+											<td>{{ service.client.name }}</td>
+
+											<td>
+												<a type="button" class="btn btn-edit" title="Editer" href="{{ path('app_admin_editService' , {id: service.id })}}">
+													<i class="fa-solid fa-pen-to-square"></i>
+												</a>
+												<form
+													action="{{ path('app_admin_deleteService', { id: service.id } ) }}" method="post" class="d-inline">
+													{# csrf_token().. creation d'un jeton unique  #}
+													<input type="hidden" name="token" value="{{ csrf_token('delete-service-'~ service.id) }}">
+													<button class="btn btn-delete">
+														<i class="fa-solid fa-trash-can"></i>
+													</button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+
+								</tbody>
+							</table>
+						</li>
+					</ul>
 				</div>
-
-				<table class="table">
-					<thead>
-						<tr>
-							<td>Nom du partenaire</td>
-							<td>Logo</td>
-
-						</tr>
-					</thead>
-					<tbody>
-						{% for part in partners | reverse  %}
-							<tr>
-								<td>{{ part.title }}</td>
-								<td>
-									{% if vich_uploader_asset(part,'coverFile') %}
-										<img src="{{ vich_uploader_asset(part,'coverFile')|imagine_filter('coverFile') }}" id="object-position-1" alt="image d'un projet">
-									{% endif %}
-								</td>
-								<td>
-								<a type="button" class="btn btn-outline-warning" title="Editer" href="{{ path('app_admin_editPartner' , {id: part.id })}}">
-									<i class="fa-solid fa-pen-to-square"></i>
-								</a>
-								<form
-									action="{{ path('app_admin_deletePartner', { id: part.id } ) }}" method="post" class="d-inline">
-									{# csrf_token().. creation d'un jeton unique  #}
-									<input type="hidden" name="token" value="{{ csrf_token('delete-partner-'~ part.id) }}">
-									<button class="btn  btn-outline-danger">
-										<i class="fa-solid fa-trash-can"></i>
-									</button>
-								</form>
-							</td>
-							</tr>
-							
-						{% endfor %}
-
-					</tbody>
-				</table>
+				<a class="btn " href="{{ path('app_admin_newService')}}">Nouveau service</a>
 			</div>
+
+
 		</div>
-
-
 	</div>
 {% endblock %}
