@@ -12,7 +12,7 @@ use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    // #[Route('/contact', name: 'app_contact')]
     public function contact(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactFormType::class);
@@ -43,8 +43,8 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('app_contact');
         }
 
-            return $this->render('contact/contact.html.twig', [
-                'form' => $form->createView()
-        ]);
+        //     return $this->render('component/_contactForm.html.twig', [
+        //         'form' => $form->createView()
+        // ]);
     }
 }

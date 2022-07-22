@@ -4,6 +4,8 @@
 
 {% block body %}
     {{parent()}}
+
+
   
    {# Section Proffessionals' Services.
    Method to be created in Service Controller, and view with relevant method rendered from Service view.
@@ -230,7 +232,11 @@
    </section>  
 
  {{ render(controller('App\\Controller\\PartnerController::showAll')) }}
- {{ render(controller('App\\Controller\\ContactController::contact')) }}
+ {# {{ render(controller('App\\Controller\\ClientController::contact')) }} #}
+
+ {# Contact form section #}
+
+{{ include('component/_contactForm.html.twig') }}
  {{ include('component/_footer.html.twig') }}
 
 {% endblock %}

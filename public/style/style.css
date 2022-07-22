@@ -24,10 +24,6 @@ body {
     background-color: var(--bg-white);   
     font-size: 16px; 
 }
-
-.test {
-  color: red !important;
-}
 .admin-nav-logo {
   width: 50%;
 }
