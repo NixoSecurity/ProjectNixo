@@ -23,7 +23,17 @@
 			<table class="table table-color">
 				<thead class="fs-5 ">
 					<tr>
-						<td>Titre</td>
+						<td>
+							<div class="dropdown">
+
+							<a class=" dropdown-toggle" role="button" data-bs-toggle="dropdown" href="{{ path('app_adminProject') }}">  Titre</a>
+							<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="{{ path('app_adminProject',{ filter: "ASC" }) }}">ASC</a></li>
+							<li><a class="dropdown-item" href="{{ path('app_adminProject',{ filter: "DESC"}) }}">DESC</a></li>
+							</ul>
+							</div>
+						
+						</td>
 						<td>Description</td>
 						<td>Ville</td>
 						<td>Créer le</td>
