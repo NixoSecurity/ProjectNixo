@@ -137,6 +137,11 @@
   background-color: var(--btn-color);
 } 
 
+.tableauDeBord {
+  text-transform: uppercase;
+  color: var(--btn-color);
+}
+
   /* Tablet and desktop view */
   @media screen and (min-width: 959px) {
     #toggle-icon {
