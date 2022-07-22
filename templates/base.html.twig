@@ -36,15 +36,20 @@
       
         {{ include('component/_navigbar.html.twig') }}
     </nav>
+     {% for message in app.flashes('success') %}
+            <div class="alert alert-success contact-alert text-center container " role"alert">
+                {{ message }}
+            </div>
+            {% endfor %}
 
         {% block body %}    
      {% endblock %}
      
         
-
-        <footer>
-        
-        </footer>
+     
+      <footer class="footer d-flex align-items-center">
+       {{ include('component/_footer.html.twig') }}   
+      </footer>
  
     </body>
 </html>

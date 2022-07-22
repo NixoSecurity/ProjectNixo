@@ -199,11 +199,11 @@ class AdminController extends AbstractController
             $clientName = $clientRepository->findby(['name' => $filter]);
             $projectAll = $projectRepository->findby(['client' => $clientName]);
         }
-        if($filter === "ASC" | $filter === "DESC"){
-            $projectAll = $projectRepository->findby(array(),array('title'=>$filter));
+        // if($filter === "ASC" | $filter === "DESC"){
+        //     $projectAll = $projectRepository->findby(array(),array('title'=>$filter));
            
            
-        }
+        // }
          else {
             $projectAll = $projectRepository->findAll();
             
