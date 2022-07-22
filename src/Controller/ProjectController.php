@@ -14,24 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProjectController extends AbstractController
 {
-    #[Route('/project', name: 'app_project')]
-    public function index(ProjectRepository $projectRepository,PaginatorInterface $paginatorInterface , Request $request): Response
-    {
-   
-
-       $projects = $paginatorInterface->paginate(
-            $projectRepository->findAll(),
-            $request->query->getInt('page',1),5
-            
-        );
-
+    // #[Route('/project', name: 'app_project')]
+    public function index(ProjectRepository $projectRepository): Response
+    {        
+        $projects = $projectRepository->findAll();
+        // insert new column in DB, in case project is special , it will appear in intro page (only 5 projects)
+        // $introProjects = $projectRepository->findBy(['special' => true]);
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,
             
         ]);
-    }
-    
+    }    
 }
 
 
