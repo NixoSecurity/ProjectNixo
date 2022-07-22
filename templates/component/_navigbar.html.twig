@@ -24,13 +24,21 @@
                     <a class="navbar-link container" href="#">Services</a>
                 </li>
                             <li class="navbar-item">
-                    <a class="navbar-link container" href="{{ path('app_contact') }}#contact">Contact</a>
+                    <a class="navbar-link container" href="{{ path('app_home')}}#contact">Contact</a>
                 </li>
             </ul>
         </div>
-
     </nav>
+
+    {% for message in app.flashes('success') %}
+      <div class="alert alert-success contact-alert text-center container " role"alert">
+          {{ message }}
+      </div>
+    {% endfor %}
+
 </header>
+
+
 
 
 
